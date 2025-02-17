@@ -540,6 +540,510 @@ test_data = dataset[train_size+val_size:]
 
         <div class="subsection">
           <h3>2.3 Benefits of Segmentation in Plant Disease Detection</h3>
+          <ol>
+            <li>
+              <strong>Improved Classification Accuracy</strong>: By segmenting
+              the plant into smaller, more meaningful regions, the model can
+              focus on the diseased areas rather than the entire image. This
+              reduces the complexity of the classification problem and allows
+              the model to focus on the parts that matter most. For example,
+              segmenting out the diseased lesions helps avoid confusion from
+              healthy parts of the plant, improving the precision of the
+              classification.
+            </li>
+            <li>
+              <strong>Handling Small and Subtle Features</strong>: Some plant
+              diseases manifest in subtle, localized regions that might be
+              difficult to identify in a large image. Segmentation helps
+              highlight these small areas of interest, making it easier for the
+              model to detect them accurately.
+            </li>
+            <li>
+              <strong>Reduction of False Positives/Negatives</strong>: Without
+              segmentation, the model might incorrectly classify healthy areas
+              of a plant as diseased or fail to detect a small diseased spot on
+              a large leaf. Segmenting the image ensures that only the relevant
+              portions of the plant are considered for classification, reducing
+              the chances of false positives and negatives.
+            </li>
+            <li>
+              <strong>Enabling Instance-Level Analysis</strong>: Some plant
+              diseases may appear in multiple instances on a single plant (e.g.,
+              several lesions on a leaf). Segmentation allows the model to
+              identify and differentiate between each lesion, enabling more
+              detailed analysis and classification of each instance.
+            </li>
+            <li>
+              <strong>Improved Model Generalization</strong>: By training the
+              model on segmented images, it learns to focus on disease-specific
+              features rather than being distracted by background elements. This
+              can help the model generalize better across different plant types,
+              backgrounds, and lighting conditions.
+            </li>
+          </ol>
+        </div>
+
+        <div class="subsection">
+          <h3>2.4 Segmentation Pipeline and Pseudocode</h3>
+          <p>
+            The segmentation process typically involves several stages,
+            including preprocessing, applying a segmentation model, and
+            post-processing the output. Below is a high-level pseudocode of the
+            segmentation pipeline:
+          </p>
+          <div class="pseudocode">
+            <p><strong>Pseudocode for Segmentation Pipeline</strong>:</p>
+            <pre>
+# Step 1: Preprocessing
+For each image in dataset:
+    resize(image, target_size)  # Standardize image size
+    normalize(image)            # Normalize pixel values to [0, 1]
+    apply_augmentation(image)   # Perform augmentations (optional)
+
+# Step 2: Segmentation
+For each image in dataset:
+    output_mask = apply_segmentation_model(image)  # U-Net, Mask R-CNN, etc.
+    if is_semantic_segmentation:
+        threshold(output_mask, 0.5)  # Apply threshold to create binary mask
+    else:
+        process_instance_masks(output_mask)  # For instance segmentation
+
+# Step 3: Post-Processing
+For each segmented image:
+    refined_mask = apply_morphological_operations(output_mask)  # Dilation/Erosion
+    overlay_mask_on_image(image, refined_mask)  # Visualize or save
+    save_segmented_image(image, refined_mask)
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>2.5 Impact of Segmentation on Model Performance</h3>
+          <p>
+            In plant disease detection, segmentation improves model performance
+            by narrowing the focus to the regions that matter. The improvements
+            can be quantified through several metrics:
+          </p>
+          <ol>
+            <li>
+              <strong>Pixel Accuracy</strong>: This measures the percentage of
+              correctly classified pixels in the segmentation mask. A higher
+              pixel accuracy indicates a better segmentation model.
+            </li>
+            <li>
+              <strong>Intersection over Union (IoU)</strong>: IoU is a metric
+              used to measure the overlap between the predicted segmentation
+              mask and the ground truth mask. It is particularly useful for
+              evaluating the performance of models in pixel-level tasks. \[ IoU
+              = \frac{\text{Area of overlap}}{\text{Area of union}} = \frac{|A
+              \cap B|}{|A \cup B|} \] A higher IoU indicates a better match
+              between the predicted and ground truth segmentation.
+            </li>
+            <li>
+              <strong>Dice Similarity Coefficient (DSC)</strong>: DSC is another
+              metric used to evaluate segmentation performance, which is similar
+              to IoU but gives a more balanced weight to precision and recall:
+              \[ DSC = \frac{2|A \cap B|}{|A| + |B|} \] The closer the DSC value
+              is to 1, the better the segmentation.
+            </li>
+            <li>
+              <strong>Class-wise Precision, Recall, and F1 Score</strong>: These
+              metrics evaluate the performance of the segmentation model in
+              detecting each class (e.g., healthy, diseased). A higher F1 score
+              reflects better performance in balancing precision and recall.
+            </li>
+            <li>
+              <strong>Boundary Accuracy</strong>: This measures how well the
+              segmented boundaries match the true boundaries of the diseased
+              region, which is especially important when dealing with small
+              lesions or subtle disease patterns.
+            </li>
+          </ol>
+        </div>
+
+        <div class="subsection">
+          <h3>2.6 Conclusion</h3>
+          <p>
+            Segmentation significantly enhances the model's ability to
+            accurately detect plant diseases by focusing attention on the most
+            relevant regions of the image. By using segmentation techniques such
+            as <strong>U-Net</strong>, <strong>Mask R-CNN</strong>, and
+            <strong>DeepLab</strong>, the model can achieve better performance
+            by precisely identifying disease-affected areas, reducing false
+            positives and negatives, and enabling finer-grained analysis of
+            plant health. This step is particularly important when dealing with
+            diseases that affect only specific parts of the plant, making it an
+            essential component for any plant disease detection pipeline. By
+            incorporating segmentation, models can focus on smaller, more
+            relevant features, ultimately improving the detection accuracy and
+            reliability of plant disease classification systems.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3: Model Selection -->
+      <div class="section">
+        <h2>Step 3: Model Selection</h2>
+        <p>
+          In this step, we explore various model architectures that could be
+          effective for <strong>plant disease detection</strong> from images,
+          taking into consideration factors like <strong>accuracy</strong>,
+          <strong>training time</strong>, <strong>resource utilization</strong>,
+          and <strong>code complexity</strong>. We will discuss
+          <strong>Convolutional Neural Networks (CNNs)</strong>,
+          <strong>VGGNet</strong>, <strong>ResNet</strong>,
+          <strong>Inception (GoogLeNet)</strong>,
+          <strong>Vision Transformer (ViT)</strong>,
+          <strong>Kernel Attention Network (KAN)</strong>, and
+          <strong>Mamba</strong>.
+        </p>
+
+        <div class="subsection">
+          <h3>3.1 Convolutional Neural Networks (CNNs)</h3>
+          <p>
+            <strong>Working Principle</strong>: Convolutional Neural Networks
+            (CNNs) are specifically designed for analyzing image data. They work
+            by passing the image through several layers of convolutions, where
+            each layer applies small filters (kernels) to detect basic visual
+            features such as edges, textures, and patterns. These detected
+            features are progressively combined to form higher-level
+            abstractions in deeper layers. CNNs often use activation functions
+            such as ReLU to add non-linearity, pooling layers (e.g., max
+            pooling) to reduce the spatial dimensions, and fully connected
+            layers at the end for classification.
+          </p>
+          <p><strong>Performance Rating</strong>:</p>
+          <ul>
+            <li>
+              <strong>Accuracy</strong>: Generally high, especially for smaller
+              or less complex datasets. CNNs are effective at extracting
+              features and classifying images.
+            </li>
+            <li>
+              <strong>Training Time</strong>: Moderate. CNNs are relatively fast
+              to train on smaller datasets, but they can become slow with larger
+              datasets or deeper architectures.
+            </li>
+            <li>
+              <strong>Resource Utilization</strong>: Moderate. They require a
+              decent amount of GPU resources for training, particularly when the
+              network becomes deeper or uses large input images.
+            </li>
+            <li>
+              <strong>Code Complexity</strong>: Medium. Implementing CNNs can be
+              straightforward with modern libraries like TensorFlow or PyTorch,
+              but they may require fine-tuning to get optimal performance.
+            </li>
+          </ul>
+          <div class="pseudocode">
+            <p><strong>Pseudocode</strong>:</p>
+            <pre>
+For each image in training set:
+    Apply convolutional filters to detect features (e.g., edges, textures)
+    Apply ReLU activation to introduce non-linearity
+    Apply max-pooling to reduce dimensionality and retain important features
+    Flatten the output from convolutional layers
+    Pass through fully connected layers to classify the image
+    Output final predictions
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>3.2 VGGNet</h3>
+          <p>
+            <strong>Working Principle</strong>: VGGNet is an architecture that
+            was designed to increase the depth of CNNs while maintaining
+            simplicity. It uses 3x3 filters stacked together to create deeper
+            networks, which can capture more complex and abstract features from
+            the input images. VGGNet focuses on simplicity and scalability,
+            using only small (3x3) convolution filters and pooling layers to
+            reduce dimensionality. Despite its simplicity, it achieves
+            state-of-the-art results, especially in tasks like object detection
+            and classification.
+          </p>
+          <p><strong>Performance Rating</strong>:</p>
+          <ul>
+            <li>
+              <strong>Accuracy</strong>: Very high for image classification
+              tasks, especially with larger datasets.
+            </li>
+            <li>
+              <strong>Training Time</strong>: High. Due to its deep
+              architecture, VGGNet requires significant computational power and
+              longer training times.
+            </li>
+            <li>
+              <strong>Resource Utilization</strong>: High. The depth of VGGNet
+              means it requires a lot of memory, especially for training on
+              large datasets.
+            </li>
+            <li>
+              <strong>Code Complexity</strong>: High. Implementing VGGNet from
+              scratch can be complex, and optimizing its performance requires
+              fine-tuning, especially due to its large number of parameters.
+            </li>
+          </ul>
+          <div class="pseudocode">
+            <p><strong>Pseudocode</strong>:</p>
+            <pre>
+For each image in training set:
+    For each convolutional layer:
+        Apply 3x3 filters to detect features
+        Apply ReLU activation after each convolution layer
+    Apply max-pooling to reduce dimensionality
+    Flatten the output to prepare for classification
+    Apply fully connected layers to make predictions
+    Output final classification result
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>3.3 ResNet (Residual Networks)</h3>
+          <p>
+            <strong>Working Principle</strong>: ResNet introduces the concept of
+            <strong>residual connections</strong>, which help prevent the
+            vanishing gradient problem in very deep networks. Instead of
+            learning the direct output of a layer, the network learns the
+            <strong>residual</strong> (or difference) between the input and
+            output of the layer. These residual connections allow the network to
+            effectively “skip” layers, making it easier to train very deep
+            networks without encountering performance degradation.
+          </p>
+          <p><strong>Performance Rating</strong>:</p>
+          <ul>
+            <li>
+              <strong>Accuracy</strong>: Very high, especially for large and
+              complex datasets.
+            </li>
+            <li>
+              <strong>Training Time</strong>: High. Deep ResNet models require
+              significant computational resources for training.
+            </li>
+            <li>
+              <strong>Resource Utilization</strong>: High. The depth of ResNet
+              means it requires powerful hardware (like GPUs or TPUs) for
+              efficient training.
+            </li>
+            <li>
+              <strong>Code Complexity</strong>: High. Implementing residual
+              connections and ensuring they work correctly requires careful
+              design and tuning.
+            </li>
+          </ul>
+          <div class="pseudocode">
+            <p><strong>Pseudocode</strong>:</p>
+            <pre>
+For each image in training set:
+    For each residual block:
+        Apply convolution layers (with skip connections)
+        Add the input of the block to the output (residual connection)
+        Apply ReLU activation
+    Apply max-pooling to reduce spatial size
+    Flatten and pass through fully connected layers
+    Output final classification result
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>3.4 Inception (GoogLeNet)</h3>
+          <p>
+            <strong>Working Principle</strong>: Inception networks, introduced
+            in GoogLeNet, use a <strong>multi-path architecture</strong>. Each
+            layer in the network contains multiple convolution filters of
+            different sizes (e.g., 1x1, 3x3, and 5x5), as well as pooling
+            layers. This allows the network to capture features at different
+            scales and makes it robust to various types of image structures.
+          </p>
+          <p><strong>Performance Rating</strong>:</p>
+          <ul>
+            <li>
+              <strong>Accuracy</strong>: Very high, especially for tasks where
+              the image structure varies.
+            </li>
+            <li>
+              <strong>Training Time</strong>: High. The network's depth and
+              complexity can make training time relatively long.
+            </li>
+            <li>
+              <strong>Resource Utilization</strong>: Moderate. Although
+              Inception networks are deep, they are efficient in terms of
+              computational resources due to their efficient design.
+            </li>
+            <li>
+              <strong>Code Complexity</strong>: High. The use of multiple
+              convolution operations and multi-path layers makes the
+              implementation more complex than traditional CNNs.
+            </li>
+          </ul>
+          <div class="pseudocode">
+            <p><strong>Pseudocode</strong>:</p>
+            <pre>
+For each image in training set:
+    For each inception block:
+        Apply multiple convolution filters of different sizes (1x1, 3x3, 5x5)
+        Combine the outputs of all filters
+        Apply ReLU activation
+    Apply max-pooling to reduce spatial size
+    Flatten and pass through fully connected layers
+    Output final classification
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>3.5 Vision Transformer (ViT)</h3>
+          <p>
+            <strong>Working Principle</strong>: The Vision Transformer (ViT)
+            uses transformer architecture — a deep learning model originally
+            designed for Natural Language Processing (NLP) — and applies it to
+            image data. The ViT model works by first splitting an image into
+            fixed-size patches, flattening each patch, and then feeding these
+            patches into the transformer model. The transformer learns the
+            relationships between the patches using
+            <strong>self-attention</strong> mechanisms, which allow it to
+            capture long-range dependencies and spatial relationships in the
+            image.
+          </p>
+          <p><strong>Performance Rating</strong>:</p>
+          <ul>
+            <li>
+              <strong>Accuracy</strong>: Very high, especially for large and
+              complex datasets.
+            </li>
+            <li>
+              <strong>Training Time</strong>: Very high. Transformers require
+              significantly more training time and computational power,
+              especially for large datasets.
+            </li>
+            <li>
+              <strong>Resource Utilization</strong>: Very high. ViT is
+              computationally expensive, requiring high-end GPUs or TPUs.
+            </li>
+            <li>
+              <strong>Code Complexity</strong>: Very high. Implementing ViT from
+              scratch is complex, and it requires efficient handling of
+              self-attention and multi-head attention layers.
+            </li>
+          </ul>
+          <div class="pseudocode">
+            <p><strong>Pseudocode</strong>:</p>
+            <pre>
+For each image in training set:
+    Split the image into patches of fixed size
+    Flatten the patches into 1D vectors
+    Apply transformer encoder layers (multi-head self-attention)
+    Add position encodings to the patches
+    Apply a classification head (fully connected layers)
+    Output the final classification
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>3.6 Kernel Attention Network (KAN)</h3>
+          <p>
+            <strong>Working Principle</strong>: Kernel Attention Networks (KAN)
+            combine the benefits of attention mechanisms and kernel methods.
+            They introduce an attention mechanism that assigns weights to
+            regions of the image that are deemed important, based on the
+            kernel-based feature maps. This helps the network focus on the most
+            relevant regions for classification, improving accuracy in complex
+            scenarios. The use of kernel functions enables the model to extract
+            features from different parts of the image at different scales and
+            focus on high-level contextual information.
+          </p>
+          <p><strong>Performance Rating</strong>:</p>
+          <ul>
+            <li>
+              <strong>Accuracy</strong>: High. KANs can achieve strong
+              performance when feature extraction and regional attention are
+              essential.
+            </li>
+            <li>
+              <strong>Training Time</strong>: Moderate to high, depending on the
+              complexity of the image and the kernel size.
+            </li>
+            <li>
+              <strong>Resource Utilization</strong>: Moderate to high. Training
+              requires specialized hardware for kernel operations and attention
+              mechanism processing.
+            </li>
+            <li>
+              <strong>Code Complexity</strong>: High. Implementing attention
+              mechanisms with kernels can be challenging and may require
+              specialized libraries.
+            </li>
+          </ul>
+          <div class="pseudocode">
+            <p><strong>Pseudocode</strong>:</p>
+            <pre>
+For each image in training set:
+    Extract features using kernel-based operations
+    Apply attention to focus on relevant regions
+    Combine attention-weighted features
+    Pass through a fully connected layer for classification
+    Output final prediction
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>3.7 Mamba</h3>
+          <p>
+            <strong>Working Principle</strong>: Mamba is a cutting-edge model
+            designed to tackle image classification tasks with a focus on both
+            speed and efficiency. It integrates
+            <strong>transformers</strong> with advanced
+            <strong>convolution operations</strong>, combining the strengths of
+            both CNNs and transformers. This hybrid approach allows Mamba to
+            capture both low-level features (via convolutions) and long-range
+            dependencies (via transformers) in a highly efficient manner.
+          </p>
+          <p><strong>Performance Rating</strong>:</p>
+          <ul>
+            <li>
+              <strong>Accuracy</strong>: High. Mamba is optimized for both speed
+              and accuracy, often outperforming traditional models on both
+              fronts.
+            </li>
+            <li>
+              <strong>Training Time</strong>: Low to moderate. Due to its
+              efficient design, Mamba trains faster than most transformer-based
+              models.
+            </li>
+            <li>
+              <strong>Resource Utilization</strong>: Low to moderate. Mamba is
+              highly efficient, making it suitable for edge devices and mobile
+              environments.
+            </li>
+            <li>
+              <strong>Code Complexity</strong>: Medium. While Mamba is more
+              efficient than other deep learning models, implementing it
+              requires understanding both transformer architectures and
+              convolution operations.
+            </li>
+          </ul>
+          <div class="pseudocode">
+            <p><strong>Pseudocode</strong>:</p>
+            <pre>
+For each image in training set:
+    Apply convolution layers to extract basic features
+    Pass through transformer layers to capture long-range dependencies
+    Combine features from convolutions and transformers
+    Output final classification using fully connected layers
+                    </pre
+            >
+          </div>
         </div>
       </div>
     </div>
