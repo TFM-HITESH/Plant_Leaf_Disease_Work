@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Plant Leaf Disease Classification - Research Guide</title>
+    <title>Plant Leaf Disease Classification</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
     <style>
-      /* General styles */
+      /* General Styles */
       * {
         margin: 0;
         padding: 0;
@@ -18,14 +18,15 @@
 
       body {
         font-family: "Roboto", sans-serif;
-        background-color: #f4f7fc;
+        background-color: #f4f9fc;
         color: #333;
+        line-height: 1.6;
       }
 
       h1,
       h2,
       h3 {
-        color: #4a90e2;
+        color: #2c3e50;
       }
 
       a {
@@ -33,15 +34,17 @@
       }
 
       .container {
-        width: 80%;
+        width: 85%;
         margin: 0 auto;
       }
 
+      /* Header */
       header {
-        background-color: #4a90e2;
+        background-color: #3498db;
         color: white;
         padding: 40px 0;
         text-align: center;
+        border-radius: 5px;
       }
 
       header h1 {
@@ -54,26 +57,28 @@
         margin-top: 10px;
       }
 
-      /* Info section */
+      /* Info Box */
       .info-box {
         background-color: white;
         border-radius: 8px;
-        padding: 30px;
+        padding: 25px;
         margin-top: 40px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
       }
 
       .info-box h2 {
         font-size: 1.8em;
         margin-bottom: 20px;
+        color: #3498db;
       }
 
       .info-box p {
         font-size: 1.1em;
-        line-height: 1.6;
+        margin-bottom: 15px;
       }
 
-      /* Button styles */
+      /* Button Styling */
       .button-container {
         margin-top: 50px;
         display: flex;
@@ -82,7 +87,7 @@
       }
 
       .button {
-        background-color: #4a90e2;
+        background-color: #3498db;
         color: white;
         padding: 15px 25px;
         font-size: 1.2em;
@@ -95,50 +100,57 @@
       }
 
       .button:hover {
-        background-color: #357ab7;
+        background-color: #2980b9;
       }
 
       .button:active {
-        background-color: #2d6ba3;
+        background-color: #1f669d;
+      }
+
+      /* Steps Section */
+      .steps-section {
+        margin-top: 50px;
+      }
+
+      .steps-section h2 {
+        text-align: center;
+        color: #3498db;
+        font-size: 2.2em;
+        margin-bottom: 40px;
+      }
+
+      .step {
+        background-color: white;
+        border-radius: 8px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .step h3 {
+        font-size: 1.6em;
+        color: #3498db;
+        margin-bottom: 10px;
+      }
+
+      .step p {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        color: #555;
       }
 
       /* Footer */
       footer {
-        background-color: #333;
+        background-color: #3498db;
         color: white;
         padding: 20px 0;
         text-align: center;
         margin-top: 50px;
+        border-radius: 5px;
       }
 
       footer p {
         font-size: 1em;
-      }
-
-      /* Custom Section Styling */
-      .section-title {
-        text-align: center;
-        color: #4a90e2;
-        margin-top: 50px;
-        font-size: 2em;
-      }
-
-      .documentation-box {
-        background-color: white;
-        border-radius: 8px;
-        padding: 25px;
-        margin-top: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .documentation-box h3 {
-        font-size: 1.5em;
-        color: #4a90e2;
-      }
-
-      .documentation-box p {
-        font-size: 1.1em;
-        line-height: 1.6;
       }
     </style>
   </head>
@@ -147,8 +159,9 @@
       <div class="container">
         <h1>Plant Leaf Disease Classification</h1>
         <p>
-          Welcome to the research guide for the classification of plant leaf
-          diseases using advanced machine learning techniques.
+          Welcome to the research guide for classifying plant leaf diseases.
+          This page outlines the key steps in developing an AI-based solution
+          for identifying plant diseases using leaf images.
         </p>
       </div>
     </header>
@@ -158,47 +171,66 @@
         <section class="info-box">
           <h2>Research Objective</h2>
           <p>
-            This research aims to assist in identifying plant diseases from leaf
-            images using state-of-the-art AI and machine learning models,
-            facilitating quicker diagnoses and efficient crop management.
+            Our goal is to support farmers by providing a fast and accurate tool
+            for identifying plant diseases. This approach leverages machine
+            learning techniques for classifying various leaf diseases based on
+            image data.
           </p>
         </section>
 
         <section class="button-container">
           <a href="pipeline.html" class="button">Pipeline Overview</a>
-          <a href="process.html" class="button">Data Processing</a>
+          <a href="process.html" class="button">Work Outline Steps</a>
           <a href="details.html" class="button">Detailed Information</a>
         </section>
 
-        <section class="section-title">
-          <h2>Research Documentation</h2>
-        </section>
+        <section class="steps-section">
+          <h2>Project Steps</h2>
 
-        <section class="documentation-box">
-          <h3>Data Collection</h3>
-          <p>
-            Plant leaf images are collected and preprocessed for the model. The
-            dataset consists of labeled images of leaves affected by different
-            diseases.
-          </p>
-        </section>
+          <div class="step">
+            <h3>1. Data Collection</h3>
+            <p>
+              Gather a diverse and extensive dataset of plant leaf images,
+              covering various species and associated diseases. A well-rounded
+              dataset is essential for training an effective model.
+            </p>
+          </div>
 
-        <section class="documentation-box">
-          <h3>Model Architecture</h3>
-          <p>
-            The architecture of the model is based on deep learning techniques
-            such as Convolutional Neural Networks (CNNs), which are known for
-            their high accuracy in image classification tasks.
-          </p>
-        </section>
+          <div class="step">
+            <h3>2. Segmentation (Optional)</h3>
+            <p>
+              In some cases, performing segmentation to isolate the leaf from
+              its background can help the model focus on the relevant features
+              of the leaf, improving classification accuracy.
+            </p>
+          </div>
 
-        <section class="documentation-box">
-          <h3>Model Evaluation</h3>
-          <p>
-            The model is evaluated based on accuracy, precision, and recall.
-            These metrics help in understanding the performance of the model in
-            real-world applications.
-          </p>
+          <div class="step">
+            <h3>3. Model Selection</h3>
+            <p>
+              Choose a suitable machine learning model for the task at hand.
+              Depending on the complexity, you may opt for traditional methods
+              or advanced deep learning techniques for image classification.
+            </p>
+          </div>
+
+          <div class="step">
+            <h3>4. Model Training</h3>
+            <p>
+              Train the selected model on the collected dataset. The training
+              process involves fine-tuning the model to recognize various
+              patterns in leaf images that correspond to specific diseases.
+            </p>
+          </div>
+
+          <div class="step">
+            <h3>5. Evaluation</h3>
+            <p>
+              After training, evaluate the model’s performance using key metrics
+              such as accuracy, precision, and recall. This ensures the model
+              can reliably classify plant diseases in real-world scenarios.
+            </p>
+          </div>
         </section>
       </div>
     </main>
