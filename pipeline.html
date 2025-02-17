@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Plant Disease Detection - Machine Learning Pipeline</title>
+    <title>Plant Disease Detection Model Guide</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -14,6 +14,7 @@
         color: #333;
       }
       .container {
+        width: 90%;
         max-width: 1200px;
         margin: 0 auto;
         padding: 20px;
@@ -23,38 +24,33 @@
       h1,
       h2,
       h3,
-      h4,
-      h5,
-      h6 {
-        color: #333;
+      h4 {
+        color: #2c3e50;
       }
       h1 {
         text-align: center;
         margin-bottom: 20px;
       }
       h2 {
-        border-bottom: 2px solid #333;
+        border-bottom: 2px solid #2c3e50;
         padding-bottom: 10px;
-        margin-top: 30px;
+        margin-top: 40px;
       }
       h3 {
+        margin-top: 30px;
+        color: #34495e;
+      }
+      h4 {
         margin-top: 20px;
+        color: #7f8c8d;
       }
       p {
-        margin: 10px 0;
+        margin: 15px 0;
       }
-      .section {
-        margin-bottom: 30px;
-      }
-      .subsection {
-        margin-left: 20px;
-      }
-      .pseudocode {
-        background-color: #f9f9f9;
-        border-left: 4px solid #333;
-        padding: 10px;
-        margin: 10px 0;
-        font-family: monospace;
+      ul,
+      ol {
+        margin: 15px 0;
+        padding-left: 20px;
       }
       table {
         width: 100%;
@@ -72,138 +68,149 @@
         text-align: left;
       }
       th {
-        background-color: #f4f4f4;
-      }
-      .metric-table th,
-      .metric-table td {
-        text-align: center;
-      }
-      .metric-table th {
-        background-color: #333;
+        background-color: #2c3e50;
         color: #fff;
       }
-      .metric-table td {
+      tr:nth-child(even) {
         background-color: #f9f9f9;
       }
-      .highlight {
-        background-color: #ffffcc;
-        padding: 2px;
+      code {
+        background-color: #ecf0f1;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: "Courier New", Courier, monospace;
+      }
+      pre {
+        background-color: #ecf0f1;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .pseudocode {
+        background-color: #e8f6f3;
+        padding: 10px;
+        border-left: 4px solid #1abc9c;
+        margin: 20px 0;
+      }
+      .pseudocode code {
+        background-color: transparent;
+      }
+      .summary-table {
+        margin: 30px 0;
+      }
+      .summary-table th {
+        background-color: #3498db;
+      }
+      .summary-table td {
+        background-color: #ecf0f1;
+      }
+      .note {
+        background-color: #fff3cd;
+        padding: 10px;
+        border-left: 4px solid #ffc107;
+        margin: 20px 0;
+      }
+      .note strong {
+        color: #856404;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Plant Disease Detection - Machine Learning Pipeline</h1>
+      <h1>Plant Disease Detection Model Guide</h1>
 
-      <!-- Step 1: Data Collection -->
-      <div class="section">
-        <h2>Step 1: Data Collection</h2>
-        <p>
-          The <strong>Data Collection</strong> step is the foundation of any
-          machine learning project, especially in the context of plant disease
-          detection. The quality and diversity of the dataset directly influence
-          the model's performance. Inaccurate, unbalanced, or biased datasets
-          can lead to poor generalization, causing the model to underperform or
-          even fail in real-world scenarios. Therefore, it is essential to
-          carefully gather and preprocess the data to ensure the model receives
-          representative and high-quality input.
-        </p>
+      <h2>Step 1: Data Collection</h2>
+      <p>
+        The <strong>Data Collection</strong> step is the foundation of any
+        machine learning project, especially in the context of plant disease
+        detection. The quality and diversity of the dataset directly influence
+        the model's performance. Inaccurate, unbalanced, or biased datasets can
+        lead to poor generalization, causing the model to underperform or even
+        fail in real-world scenarios. Therefore, it is essential to carefully
+        gather and preprocess the data to ensure the model receives
+        representative and high-quality input.
+      </p>
 
-        <div class="subsection">
-          <h3>1.1 Dataset Sources</h3>
-          <p>
-            For plant disease detection, datasets often include images of
-            plants, typically categorized by the type of disease they exhibit or
-            whether they are healthy. Below are common sources for obtaining
-            such datasets:
-          </p>
+      <h3>1.1 Dataset Sources</h3>
+      <p>
+        For plant disease detection, datasets often include images of plants,
+        typically categorized by the type of disease they exhibit or whether
+        they are healthy. Below are common sources for obtaining such datasets:
+      </p>
+      <ul>
+        <li>
+          <strong>Public Databases and Repositories</strong>:
           <ul>
             <li>
-              <strong>Public Databases and Repositories</strong>:
-              <ul>
-                <li>
-                  <strong>PlantVillage Dataset</strong>: A widely used dataset
-                  in the field of plant disease detection, the
-                  <strong>PlantVillage dataset</strong> contains over 50,000
-                  images of healthy and diseased crops, including over 14
-                  classes of diseases for several types of plants. It includes
-                  high-resolution images of plant leaves suffering from diseases
-                  like <strong>Tomato Early Blight</strong>,
-                  <strong>Tomato Late Blight</strong>,
-                  <strong>Potato Early Blight</strong>,
-                  <strong>Apple Scab</strong>, and
-                  <strong>Healthy leaves</strong>. These images are typically
-                  captured in controlled environments and serve as a valuable
-                  resource for training and testing models.
-                </li>
-                <li>
-                  <strong>Kaggle Datasets</strong>: Kaggle often has various
-                  datasets for plant disease detection, such as images of
-                  tomatoes, apple trees, and other crops.
-                </li>
-                <li>
-                  <strong>UCI Machine Learning Repository</strong>: UCI hosts
-                  multiple datasets, including those for agricultural and plant
-                  disease classification.
-                </li>
-                <li>
-                  <strong>Agricultural Research Institutions</strong>:
-                  Universities or research organizations in agriculture often
-                  provide datasets for crop diseases.
-                </li>
-                <li>
-                  <strong>IoT and Field Data</strong>: In some cases, data can
-                  be gathered through sensors, cameras, or drones installed in
-                  fields to continuously capture plant images and information
-                  about the environment, such as soil moisture and temperature.
-                </li>
-                <li>
-                  <strong>Crowdsourced Data</strong>: Platforms like
-                  <strong>iNaturalist</strong> or
-                  <strong>PlantSnap</strong> allow users to upload plant images,
-                  which can be collected and used for training purposes, though
-                  they may require more cleaning and validation.
-                </li>
-              </ul>
+              <strong>PlantVillage Dataset</strong>: A widely used dataset in
+              the field of plant disease detection, the
+              <strong>PlantVillage dataset</strong> contains over 50,000 images
+              of healthy and diseased crops, including over 14 classes of
+              diseases for several types of plants.
+            </li>
+            <li>
+              <strong>Kaggle Datasets</strong>: Kaggle often has various
+              datasets for plant disease detection, such as images of tomatoes,
+              apple trees, and other crops.
+            </li>
+            <li>
+              <strong>UCI Machine Learning Repository</strong>: UCI hosts
+              multiple datasets, including those for agricultural and plant
+              disease classification.
             </li>
           </ul>
-        </div>
+        </li>
+        <li>
+          <strong>Agricultural Research Institutions</strong>: Universities or
+          research organizations in agriculture often provide datasets for crop
+          diseases.
+        </li>
+        <li>
+          <strong>IoT and Field Data</strong>: In some cases, data can be
+          gathered through sensors, cameras, or drones installed in fields to
+          continuously capture plant images and information about the
+          environment, such as soil moisture and temperature.
+        </li>
+        <li>
+          <strong>Crowdsourced Data</strong>: Platforms like
+          <strong>iNaturalist</strong> or <strong>PlantSnap</strong> allow users
+          to upload plant images, which can be collected and used for training
+          purposes, though they may require more cleaning and validation.
+        </li>
+      </ul>
 
-        <div class="subsection">
-          <h3>1.2 Data Types and Data Annotation</h3>
-          <p>
-            Data for plant disease detection primarily consists of
-            <strong>images</strong>. Each image in the dataset needs to be
-            properly annotated to specify whether the plant in the image is
-            diseased or healthy, and if diseased, which specific disease it
-            exhibits.
-          </p>
-          <p><strong>Types of Annotations</strong>:</p>
-          <ul>
-            <li>
-              <strong>Binary Labels</strong>: Each image is labeled as
-              "diseased" or "healthy."
-            </li>
-            <li>
-              <strong>Multi-Class Labels</strong>: Each image is labeled with
-              the type of disease (e.g., <strong>"Tomato Early Blight"</strong>,
-              <strong>"Tomato Late Blight"</strong>,
-              <strong>"Healthy"</strong>).
-            </li>
-            <li>
-              <strong>Bounding Boxes or Pixel-Level Masks</strong> (for
-              segmentation tasks): In some cases, the disease might only affect
-              certain parts of the plant (like leaves). For instance, instead of
-              labeling the entire image as diseased, the affected area is
-              annotated using bounding boxes or pixel-level masks (used in
-              <strong>semantic segmentation</strong> or
-              <strong>instance segmentation</strong> tasks).
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode for Data Annotation Process</strong>:</p>
-            <pre>
-# Dataset annotation pseudocode:
+      <h3>1.2 Data Types and Data Annotation</h3>
+      <p>
+        Data for plant disease detection primarily consists of
+        <strong>images</strong>. Each image in the dataset needs to be properly
+        annotated to specify whether the plant in the image is diseased or
+        healthy, and if diseased, which specific disease it exhibits.
+      </p>
+      <p><strong>Types of Annotations</strong>:</p>
+      <ul>
+        <li>
+          <strong>Binary Labels</strong>: Each image is labeled as "diseased" or
+          "healthy."
+        </li>
+        <li>
+          <strong>Multi-Class Labels</strong>: Each image is labeled with the
+          type of disease (e.g., <strong>"Tomato Early Blight"</strong>,
+          <strong>"Tomato Late Blight"</strong>, <strong>"Healthy"</strong>).
+        </li>
+        <li>
+          <strong>Bounding Boxes or Pixel-Level Masks</strong> (for segmentation
+          tasks): In some cases, the disease might only affect certain parts of
+          the plant (like leaves). For instance, instead of labeling the entire
+          image as diseased, the affected area is annotated using bounding boxes
+          or pixel-level masks (used in
+          <strong>semantic segmentation</strong> or
+          <strong>instance segmentation</strong> tasks).
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Data Annotation Process</h4>
+        <pre><code># Dataset annotation pseudocode:
 For each image in dataset:
     # Manually or semi-automatically annotate image
     label = classify_plant_disease(image)
@@ -211,109 +218,82 @@ For each image in dataset:
         add_bounding_box(image, coordinates)  # Optional for segmentation tasks
     else:
         label = "Healthy"
-    save_annotation(image, label)
-                    </pre
-            >
-          </div>
-        </div>
+    save_annotation(image, label)</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>1.3 Data Quality</h3>
-          <p>
-            <strong>Data quality</strong> plays a crucial role in model
-            performance. The dataset should be representative of real-world
-            scenarios, containing diverse plant images under different
-            environmental conditions and growth stages.
-          </p>
-          <ul>
-            <li>
-              <strong>Diversity</strong>: Ensure the dataset contains images of
-              plants from different geographic locations, lighting conditions,
-              camera resolutions, and angles. This helps the model generalize
-              better.
-            </li>
-            <li>
-              <strong>Balanced Representation</strong>: Ensure that the dataset
-              has balanced representations of various plant diseases and healthy
-              plants. <strong>Class imbalance</strong> can lead to biased models
-              that favor the majority class (e.g., healthy plants) and ignore
-              the minority class (e.g., diseased plants).
-            </li>
-            <li>
-              <strong>Image Quality</strong>: High-resolution images with
-              sufficient detail are crucial for detecting subtle differences
-              between diseased and healthy plants. Images should be clear and
-              not overly noisy or blurry.
-            </li>
-          </ul>
-          <p><strong>Class Imbalance Handling</strong>:</p>
-          <ul>
-            <li>
-              <strong>Resampling</strong>: If certain diseases are
-              underrepresented in the dataset, consider using
-              <strong>undersampling</strong> (removing examples from the
-              majority class) or <strong>oversampling</strong> (adding more
-              examples to the minority class).
-            </li>
-            <li>
-              <strong>Synthetic Data</strong>: You can generate synthetic data
-              by augmenting images using techniques such as
-              <strong>rotation</strong>, <strong>flipping</strong>,
-              <strong>scaling</strong>, <strong>color adjustment</strong>, and
-              <strong>cropping</strong> to artificially increase the number of
-              examples from underrepresented classes.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode for Handling Class Imbalance</strong>:</p>
-            <pre>
-# Resampling pseudocode:
+      <h3>1.3 Data Quality</h3>
+      <p>
+        <strong>Data quality</strong> plays a crucial role in model performance.
+        The dataset should be representative of real-world scenarios, containing
+        diverse plant images under different environmental conditions and growth
+        stages.
+      </p>
+      <ul>
+        <li>
+          <strong>Diversity</strong>: Ensure the dataset contains images of
+          plants from different geographic locations, lighting conditions,
+          camera resolutions, and angles. This helps the model generalize
+          better.
+        </li>
+        <li>
+          <strong>Balanced Representation</strong>: Ensure that the dataset has
+          balanced representations of various plant diseases and healthy plants.
+          <strong>Class imbalance</strong> can lead to biased models that favor
+          the majority class (e.g., healthy plants) and ignore the minority
+          class (e.g., diseased plants).
+        </li>
+        <li>
+          <strong>Image Quality</strong>: High-resolution images with sufficient
+          detail are crucial for detecting subtle differences between diseased
+          and healthy plants. Images should be clear and not overly noisy or
+          blurry.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Handling Class Imbalance</h4>
+        <pre><code># Resampling pseudocode:
 For each class in dataset:
     if class has fewer samples:
         oversample(class)  # Duplicate examples or create synthetic images
     else:
-        undersample(class)  # Remove extra examples from the majority class
-                    </pre
-            >
-          </div>
-        </div>
+        undersample(class)  # Remove extra examples from the majority class</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>1.4 Data Augmentation</h3>
-          <p>
-            <strong>Data augmentation</strong> is crucial for enhancing model
-            generalization by artificially expanding the dataset. This is
-            especially important for image data where the model needs to learn
-            robust features. For plant disease detection, common image
-            augmentation techniques include:
-          </p>
-          <ul>
-            <li>
-              <strong>Rotation</strong>: Randomly rotating images to simulate
-              varying angles.
-            </li>
-            <li>
-              <strong>Flipping</strong>: Flipping images horizontally or
-              vertically to simulate different orientations.
-            </li>
-            <li>
-              <strong>Zooming and Cropping</strong>: Zoom in on the plant or
-              crop and crop random sections to add diversity.
-            </li>
-            <li>
-              <strong>Brightness/Contrast Adjustment</strong>: Varying the
-              brightness or contrast to simulate different lighting conditions.
-            </li>
-            <li>
-              <strong>Noise Injection</strong>: Adding slight noise to the
-              images to help the model learn to be invariant to small
-              distortions.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode for Image Augmentation</strong>:</p>
-            <pre>
-# Data Augmentation pseudocode:
+      <h3>1.4 Data Augmentation</h3>
+      <p>
+        <strong>Data augmentation</strong> is crucial for enhancing model
+        generalization by artificially expanding the dataset. This is especially
+        important for image data where the model needs to learn robust features.
+        For plant disease detection, common image augmentation techniques
+        include:
+      </p>
+      <ul>
+        <li>
+          <strong>Rotation</strong>: Randomly rotating images to simulate
+          varying angles.
+        </li>
+        <li>
+          <strong>Flipping</strong>: Flipping images horizontally or vertically
+          to simulate different orientations.
+        </li>
+        <li>
+          <strong>Zooming and Cropping</strong>: Zoom in on the plant or crop
+          and crop random sections to add diversity.
+        </li>
+        <li>
+          <strong>Brightness/Contrast Adjustment</strong>: Varying the
+          brightness or contrast to simulate different lighting conditions.
+        </li>
+        <li>
+          <strong>Noise Injection</strong>: Adding slight noise to the images to
+          help the model learn to be invariant to small distortions.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Image Augmentation</h4>
+        <pre><code># Data Augmentation pseudocode:
 For each image in dataset:
     if random() < 0.5:
         rotate(image, angle)
@@ -322,279 +302,171 @@ For each image in dataset:
     if random() < 0.5:
         adjust_brightness(image, factor)
     # Other augmentations like zooming, cropping, etc.
-    save_augmented_image(image)
-                    </pre
-            >
-          </div>
-        </div>
+    save_augmented_image(image)</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>1.5 Data Preprocessing</h3>
-          <p>
-            After collecting and annotating the data, the next step is to
-            preprocess it to make it suitable for training. The preprocessing
-            steps typically include:
-          </p>
-          <ul>
-            <li>
-              <strong>Resizing</strong>: Resize all images to a standard size
-              (e.g., 224x224 pixels) to ensure consistency for input to the
-              model.
-            </li>
-            <li>
-              <strong>Normalization</strong>: Scale pixel values to a range
-              between 0 and 1 (or -1 to 1, depending on the model).
-              <ul>
-                <li>
-                  <strong>Formula for Normalization</strong>: \[
-                  \text{Normalized Pixel Value} = \frac{\text{Pixel Value} -
-                  \text{Mean}}{\text{Standard Deviation}} \]
-                </li>
-              </ul>
-            </li>
-            <li>
-              <strong>Color Space Conversion</strong>: Convert the image to a
-              different color space (e.g., from RGB to grayscale or HSV) if
-              required by the model.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode for Data Preprocessing</strong>:</p>
-            <pre>
-# Image Preprocessing pseudocode:
+      <h3>1.5 Data Preprocessing</h3>
+      <p>
+        After collecting and annotating the data, the next step is to preprocess
+        it to make it suitable for training. The preprocessing steps typically
+        include:
+      </p>
+      <ul>
+        <li>
+          <strong>Resizing</strong>: Resize all images to a standard size (e.g.,
+          224x224 pixels) to ensure consistency for input to the model.
+        </li>
+        <li>
+          <strong>Normalization</strong>: Scale pixel values to a range between
+          0 and 1 (or -1 to 1, depending on the model).
+        </li>
+        <li>
+          <strong>Color Space Conversion</strong>: Convert the image to a
+          different color space (e.g., from RGB to grayscale or HSV) if required
+          by the model.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Data Preprocessing</h4>
+        <pre><code># Image Preprocessing pseudocode:
 For each image in dataset:
     resize(image, target_size)  # Standardize all images to the same size
     normalize(image)  # Normalize pixel values
     convert_to_grayscale(image)  # Optional if model requires
-    save_preprocessed_image(image)
-                    </pre
-            >
-          </div>
-        </div>
+    save_preprocessed_image(image)</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>1.6 Data Splitting</h3>
-          <p>
-            To evaluate the model's generalization ability, it is crucial to
-            split the dataset into different sets:
-          </p>
-          <ul>
-            <li>
-              <strong>Training Set</strong>: Typically 70%-80% of the data. This
-              is used to train the model.
-            </li>
-            <li>
-              <strong>Validation Set</strong>: Typically 10%-15% of the data.
-              This is used to tune hyperparameters and evaluate the model during
-              training.
-            </li>
-            <li>
-              <strong>Test Set</strong>: Typically 10%-15% of the data. This is
-              used to evaluate the final model's performance after training.
-            </li>
-          </ul>
-          <p>
-            The <strong>training set</strong> is the primary dataset used for
-            fitting the model. The <strong>validation set</strong> allows you to
-            tune hyperparameters (e.g., learning rate, number of layers). The
-            <strong>test set</strong> is for assessing the final model,
-            simulating real-world use.
-          </p>
-          <div class="pseudocode">
-            <p><strong>Pseudocode for Data Splitting</strong>:</p>
-            <pre>
-# Data Splitting pseudocode:
+      <h3>1.6 Data Splitting</h3>
+      <p>
+        To evaluate the model's generalization ability, it is crucial to split
+        the dataset into different sets:
+      </p>
+      <ul>
+        <li>
+          <strong>Training Set</strong>: Typically 70%-80% of the data. This is
+          used to train the model.
+        </li>
+        <li>
+          <strong>Validation Set</strong>: Typically 10%-15% of the data. This
+          is used to tune hyperparameters and evaluate the model during
+          training.
+        </li>
+        <li>
+          <strong>Test Set</strong>: Typically 10%-15% of the data. This is used
+          to evaluate the final model's performance after training.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Data Splitting</h4>
+        <pre><code># Data Splitting pseudocode:
 split(dataset, train_size=0.8, val_size=0.1, test_size=0.1)
 train_data = dataset[:train_size]
 val_data = dataset[train_size:train_size+val_size]
-test_data = dataset[train_size+val_size:]
-                    </pre
-            >
-          </div>
-        </div>
-
-        <div class="subsection">
-          <h3>Conclusion</h3>
-          <p>
-            The <strong>Data Collection</strong> step is foundational in
-            building a robust plant disease detection system. Properly
-            collecting, annotating, and preprocessing the data ensures that the
-            model learns to generalize well and accurately detect plant
-            diseases. Careful attention should be given to handling class
-            imbalances, performing data augmentation, and ensuring the data is
-            of high quality. A good dataset with diverse, representative, and
-            clean data significantly impacts the model’s performance during the
-            evaluation phase. The <strong>PlantVillage dataset</strong>, with
-            its large number of annotated plant disease images, is an excellent
-            starting point for many plant disease detection tasks, offering a
-            wide range of diseases and plant types.
-          </p>
-        </div>
+test_data = dataset[train_size+val_size:]</code></pre>
       </div>
 
-      <!-- Step 2: Segmentation -->
-      <div class="section">
-        <h2>Step 2: Segmentation</h2>
-        <p>
-          <strong>Segmentation</strong> is a crucial step in image analysis,
-          particularly in plant disease detection tasks, where identifying the
-          region of interest (ROI) — such as diseased parts of the plant — is
-          necessary for improving classification accuracy. Instead of treating
-          the entire image as a single object for classification, segmentation
-          allows the model to focus on specific areas of the image, such as the
-          leaves or the lesions, which helps improve the performance and
-          precision of disease detection.
-        </p>
+      <h2>Step 2: Segmentation</h2>
+      <p>
+        <strong>Segmentation</strong> is a crucial step in image analysis,
+        particularly in plant disease detection tasks, where identifying the
+        region of interest (ROI) — such as diseased parts of the plant — is
+        necessary for improving classification accuracy. Instead of treating the
+        entire image as a single object for classification, segmentation allows
+        the model to focus on specific areas of the image, such as the leaves or
+        the lesions, which helps improve the performance and precision of
+        disease detection.
+      </p>
 
-        <div class="subsection">
-          <h3>2.1 What is Segmentation?</h3>
-          <p>
-            Segmentation involves dividing an image into meaningful parts,
-            typically known as <strong>segments</strong>. The goal is to
-            simplify or change the representation of the image into something
-            that is more meaningful and easier to analyze. In the context of
-            plant disease detection, the segmentation task often involves:
-          </p>
-          <ul>
-            <li>
-              Identifying specific parts of the plant (e.g., leaves, stems) and
-              distinguishing healthy areas from diseased ones.
-            </li>
-            <li>
-              Highlighting lesions or spots on the leaves that indicate disease
-              symptoms.
-            </li>
-          </ul>
-          <p>
-            Segmentation can be broadly classified into the following
-            categories:
-          </p>
-          <ul>
-            <li>
-              <strong>Semantic Segmentation</strong>: This involves classifying
-              each pixel in an image as belonging to a particular class (e.g.,
-              healthy leaf, diseased leaf, background).
-            </li>
-            <li>
-              <strong>Instance Segmentation</strong>: This extends semantic
-              segmentation by distinguishing between different objects of the
-              same class. For example, multiple instances of diseased lesions on
-              the same leaf would be treated as separate entities.
-            </li>
-            <li>
-              <strong>Panoptic Segmentation</strong>: A combination of semantic
-              and instance segmentation, where both things (individual objects)
-              and stuff (background) are segmented.
-            </li>
-          </ul>
-        </div>
+      <h3>2.1 What is Segmentation?</h3>
+      <p>
+        Segmentation involves dividing an image into meaningful parts, typically
+        known as <strong>segments</strong>. The goal is to simplify or change
+        the representation of the image into something that is more meaningful
+        and easier to analyze. In the context of plant disease detection, the
+        segmentation task often involves:
+      </p>
+      <ul>
+        <li>
+          Identifying specific parts of the plant (e.g., leaves, stems) and
+          distinguishing healthy areas from diseased ones.
+        </li>
+        <li>
+          Highlighting lesions or spots on the leaves that indicate disease
+          symptoms.
+        </li>
+      </ul>
 
-        <div class="subsection">
-          <h3>2.2 Segmentation Algorithms</h3>
-          <p>
-            There are various segmentation algorithms that can be utilized to
-            perform plant disease detection. The choice of algorithm depends on
-            the complexity of the task, the nature of the dataset, and the
-            desired level of detail in the segmentation.
-          </p>
-          <p><strong>Common Segmentation Models</strong>:</p>
-          <ul>
-            <li>
-              <strong>U-Net</strong>: A popular architecture for biomedical
-              image segmentation, U-Net is a convolutional neural network (CNN)
-              that uses a contracting path to capture context and a symmetric
-              expanding path to enable precise localization. It is particularly
-              well-suited for plant disease detection tasks where small,
-              detailed areas need to be identified and localized.
-            </li>
-            <li>
-              <strong>Mask R-CNN</strong>: An extension of Faster R-CNN, which
-              is used for object detection, Mask R-CNN adds a segmentation mask
-              to each detected object. This allows for instance-level
-              segmentation and is useful when the goal is to detect and segment
-              multiple diseases on a single plant.
-            </li>
-            <li>
-              <strong>DeepLab</strong>: DeepLab is a CNN-based architecture
-              designed for semantic image segmentation. It uses atrous
-              convolution (also known as dilated convolution) to capture
-              multi-scale context, which can be beneficial for segmenting plant
-              images at various scales and identifying lesions or small spots on
-              the leaves.
-            </li>
-            <li>
-              <strong>FCN (Fully Convolutional Networks)</strong>: FCNs are
-              another architecture used for pixel-level classification in
-              segmentation tasks. These networks replace fully connected layers
-              with convolutional layers to handle variable input sizes and are
-              effective for dense prediction tasks like segmentation.
-            </li>
-            <li>
-              <strong>SegNet</strong>: This is a deep convolutional network
-              designed for semantic segmentation. It is a good choice for tasks
-              that involve pixel-level classification, such as separating
-              healthy and diseased parts of a plant.
-            </li>
-          </ul>
-        </div>
+      <h3>2.2 Segmentation Algorithms</h3>
+      <p>
+        There are various segmentation algorithms that can be utilized to
+        perform plant disease detection. The choice of algorithm depends on the
+        complexity of the task, the nature of the dataset, and the desired level
+        of detail in the segmentation.
+      </p>
+      <p><strong>Common Segmentation Models</strong>:</p>
+      <ul>
+        <li>
+          <strong>U-Net</strong>: A popular architecture for biomedical image
+          segmentation, U-Net is a convolutional neural network (CNN) that uses
+          a contracting path to capture context and a symmetric expanding path
+          to enable precise localization.
+        </li>
+        <li>
+          <strong>Mask R-CNN</strong>: An extension of Faster R-CNN, which is
+          used for object detection, Mask R-CNN adds a segmentation mask to each
+          detected object.
+        </li>
+        <li>
+          <strong>DeepLab</strong>: DeepLab is a CNN-based architecture designed
+          for semantic image segmentation. It uses atrous convolution (also
+          known as dilated convolution) to capture multi-scale context.
+        </li>
+        <li>
+          <strong>FCN (Fully Convolutional Networks)</strong>: FCNs are another
+          architecture used for pixel-level classification in segmentation
+          tasks.
+        </li>
+        <li>
+          <strong>SegNet</strong>: This is a deep convolutional network designed
+          for semantic segmentation.
+        </li>
+      </ul>
 
-        <div class="subsection">
-          <h3>2.3 Benefits of Segmentation in Plant Disease Detection</h3>
-          <ol>
-            <li>
-              <strong>Improved Classification Accuracy</strong>: By segmenting
-              the plant into smaller, more meaningful regions, the model can
-              focus on the diseased areas rather than the entire image. This
-              reduces the complexity of the classification problem and allows
-              the model to focus on the parts that matter most. For example,
-              segmenting out the diseased lesions helps avoid confusion from
-              healthy parts of the plant, improving the precision of the
-              classification.
-            </li>
-            <li>
-              <strong>Handling Small and Subtle Features</strong>: Some plant
-              diseases manifest in subtle, localized regions that might be
-              difficult to identify in a large image. Segmentation helps
-              highlight these small areas of interest, making it easier for the
-              model to detect them accurately.
-            </li>
-            <li>
-              <strong>Reduction of False Positives/Negatives</strong>: Without
-              segmentation, the model might incorrectly classify healthy areas
-              of a plant as diseased or fail to detect a small diseased spot on
-              a large leaf. Segmenting the image ensures that only the relevant
-              portions of the plant are considered for classification, reducing
-              the chances of false positives and negatives.
-            </li>
-            <li>
-              <strong>Enabling Instance-Level Analysis</strong>: Some plant
-              diseases may appear in multiple instances on a single plant (e.g.,
-              several lesions on a leaf). Segmentation allows the model to
-              identify and differentiate between each lesion, enabling more
-              detailed analysis and classification of each instance.
-            </li>
-            <li>
-              <strong>Improved Model Generalization</strong>: By training the
-              model on segmented images, it learns to focus on disease-specific
-              features rather than being distracted by background elements. This
-              can help the model generalize better across different plant types,
-              backgrounds, and lighting conditions.
-            </li>
-          </ol>
-        </div>
+      <h3>2.3 Benefits of Segmentation in Plant Disease Detection</h3>
+      <ol>
+        <li>
+          <strong>Improved Classification Accuracy</strong>: By segmenting the
+          plant into smaller, more meaningful regions, the model can focus on
+          the diseased areas rather than the entire image.
+        </li>
+        <li>
+          <strong>Handling Small and Subtle Features</strong>: Some plant
+          diseases manifest in subtle, localized regions that might be difficult
+          to identify in a large image.
+        </li>
+        <li>
+          <strong>Reduction of False Positives/Negatives</strong>: Without
+          segmentation, the model might incorrectly classify healthy areas of a
+          plant as diseased or fail to detect a small diseased spot on a large
+          leaf.
+        </li>
+        <li>
+          <strong>Enabling Instance-Level Analysis</strong>: Some plant diseases
+          may appear in multiple instances on a single plant (e.g., several
+          lesions on a leaf).
+        </li>
+        <li>
+          <strong>Improved Model Generalization</strong>: By training the model
+          on segmented images, it learns to focus on disease-specific features
+          rather than being distracted by background elements.
+        </li>
+      </ol>
 
-        <div class="subsection">
-          <h3>2.4 Segmentation Pipeline and Pseudocode</h3>
-          <p>
-            The segmentation process typically involves several stages,
-            including preprocessing, applying a segmentation model, and
-            post-processing the output. Below is a high-level pseudocode of the
-            segmentation pipeline:
-          </p>
-          <div class="pseudocode">
-            <p><strong>Pseudocode for Segmentation Pipeline</strong>:</p>
-            <pre>
-# Step 1: Preprocessing
+      <div class="pseudocode">
+        <h4>Pseudocode for Segmentation Pipeline</h4>
+        <pre><code># Step 1: Preprocessing
 For each image in dataset:
     resize(image, target_size)  # Standardize image size
     normalize(image)            # Normalize pixel values to [0, 1]
@@ -612,440 +484,516 @@ For each image in dataset:
 For each segmented image:
     refined_mask = apply_morphological_operations(output_mask)  # Dilation/Erosion
     overlay_mask_on_image(image, refined_mask)  # Visualize or save
-    save_segmented_image(image, refined_mask)
-                    </pre
-            >
-          </div>
-        </div>
-
-        <div class="subsection">
-          <h3>2.5 Impact of Segmentation on Model Performance</h3>
-          <p>
-            In plant disease detection, segmentation improves model performance
-            by narrowing the focus to the regions that matter. The improvements
-            can be quantified through several metrics:
-          </p>
-          <ol>
-            <li>
-              <strong>Pixel Accuracy</strong>: This measures the percentage of
-              correctly classified pixels in the segmentation mask. A higher
-              pixel accuracy indicates a better segmentation model.
-            </li>
-            <li>
-              <strong>Intersection over Union (IoU)</strong>: IoU is a metric
-              used to measure the overlap between the predicted segmentation
-              mask and the ground truth mask. It is particularly useful for
-              evaluating the performance of models in pixel-level tasks. \[ IoU
-              = \frac{\text{Area of overlap}}{\text{Area of union}} = \frac{|A
-              \cap B|}{|A \cup B|} \] A higher IoU indicates a better match
-              between the predicted and ground truth segmentation.
-            </li>
-            <li>
-              <strong>Dice Similarity Coefficient (DSC)</strong>: DSC is another
-              metric used to evaluate segmentation performance, which is similar
-              to IoU but gives a more balanced weight to precision and recall:
-              \[ DSC = \frac{2|A \cap B|}{|A| + |B|} \] The closer the DSC value
-              is to 1, the better the segmentation.
-            </li>
-            <li>
-              <strong>Class-wise Precision, Recall, and F1 Score</strong>: These
-              metrics evaluate the performance of the segmentation model in
-              detecting each class (e.g., healthy, diseased). A higher F1 score
-              reflects better performance in balancing precision and recall.
-            </li>
-            <li>
-              <strong>Boundary Accuracy</strong>: This measures how well the
-              segmented boundaries match the true boundaries of the diseased
-              region, which is especially important when dealing with small
-              lesions or subtle disease patterns.
-            </li>
-          </ol>
-        </div>
-
-        <div class="subsection">
-          <h3>2.6 Conclusion</h3>
-          <p>
-            Segmentation significantly enhances the model's ability to
-            accurately detect plant diseases by focusing attention on the most
-            relevant regions of the image. By using segmentation techniques such
-            as <strong>U-Net</strong>, <strong>Mask R-CNN</strong>, and
-            <strong>DeepLab</strong>, the model can achieve better performance
-            by precisely identifying disease-affected areas, reducing false
-            positives and negatives, and enabling finer-grained analysis of
-            plant health. This step is particularly important when dealing with
-            diseases that affect only specific parts of the plant, making it an
-            essential component for any plant disease detection pipeline. By
-            incorporating segmentation, models can focus on smaller, more
-            relevant features, ultimately improving the detection accuracy and
-            reliability of plant disease classification systems.
-          </p>
-        </div>
+    save_segmented_image(image, refined_mask)</code></pre>
       </div>
 
-      <!-- Step 3: Model Selection -->
-      <div class="section">
-        <h2>Step 3: Model Selection</h2>
-        <p>
-          In this step, we explore various model architectures that could be
-          effective for <strong>plant disease detection</strong> from images,
-          taking into consideration factors like <strong>accuracy</strong>,
-          <strong>training time</strong>, <strong>resource utilization</strong>,
-          and <strong>code complexity</strong>. We will discuss
-          <strong>Convolutional Neural Networks (CNNs)</strong>,
-          <strong>VGGNet</strong>, <strong>ResNet</strong>,
-          <strong>Inception (GoogLeNet)</strong>,
-          <strong>Vision Transformer (ViT)</strong>,
-          <strong>Kernel Attention Network (KAN)</strong>, and
-          <strong>Mamba</strong>.
-        </p>
+      <h3>2.4 Impact of Segmentation on Model Performance</h3>
+      <p>
+        In plant disease detection, segmentation improves model performance by
+        narrowing the focus to the regions that matter. The improvements can be
+        quantified through several metrics:
+      </p>
+      <ul>
+        <li>
+          <strong>Pixel Accuracy</strong>: This measures the percentage of
+          correctly classified pixels in the segmentation mask.
+        </li>
+        <li>
+          <strong>Intersection over Union (IoU)</strong>: IoU is a metric used
+          to measure the overlap between the predicted segmentation mask and the
+          ground truth mask.
+        </li>
+        <li>
+          <strong>Dice Similarity Coefficient (DSC)</strong>: DSC is another
+          metric used to evaluate segmentation performance, which is similar to
+          IoU but gives a more balanced weight to precision and recall.
+        </li>
+        <li>
+          <strong>Class-wise Precision, Recall, and F1 Score</strong>: These
+          metrics evaluate the performance of the segmentation model in
+          detecting each class (e.g., healthy, diseased).
+        </li>
+        <li>
+          <strong>Boundary Accuracy</strong>: This measures how well the
+          segmented boundaries match the true boundaries of the diseased region.
+        </li>
+      </ul>
 
-        <div class="subsection">
-          <h3>3.1 Convolutional Neural Networks (CNNs)</h3>
-          <p>
-            <strong>Working Principle</strong>: Convolutional Neural Networks
-            (CNNs) are specifically designed for analyzing image data. They work
-            by passing the image through several layers of convolutions, where
-            each layer applies small filters (kernels) to detect basic visual
-            features such as edges, textures, and patterns. These detected
-            features are progressively combined to form higher-level
-            abstractions in deeper layers. CNNs often use activation functions
-            such as ReLU to add non-linearity, pooling layers (e.g., max
-            pooling) to reduce the spatial dimensions, and fully connected
-            layers at the end for classification.
-          </p>
-          <p><strong>Performance Rating</strong>:</p>
-          <ul>
-            <li>
-              <strong>Accuracy</strong>: Generally high, especially for smaller
-              or less complex datasets. CNNs are effective at extracting
-              features and classifying images.
-            </li>
-            <li>
-              <strong>Training Time</strong>: Moderate. CNNs are relatively fast
-              to train on smaller datasets, but they can become slow with larger
-              datasets or deeper architectures.
-            </li>
-            <li>
-              <strong>Resource Utilization</strong>: Moderate. They require a
-              decent amount of GPU resources for training, particularly when the
-              network becomes deeper or uses large input images.
-            </li>
-            <li>
-              <strong>Code Complexity</strong>: Medium. Implementing CNNs can be
-              straightforward with modern libraries like TensorFlow or PyTorch,
-              but they may require fine-tuning to get optimal performance.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode</strong>:</p>
-            <pre>
-For each image in training set:
+      <h2>Step 3: Model Selection</h2>
+      <p>
+        In this step, we explore various model architectures that could be
+        effective for <strong>plant disease detection</strong> from images,
+        taking into consideration factors like <strong>accuracy</strong>,
+        <strong>training time</strong>, <strong>resource utilization</strong>,
+        and <strong>code complexity</strong>. We will discuss
+        <strong>Convolutional Neural Networks (CNNs)</strong>,
+        <strong>VGGNet</strong>, <strong>ResNet</strong>,
+        <strong>Inception (GoogLeNet)</strong>,
+        <strong>Vision Transformer (ViT)</strong>,
+        <strong>Kernel Attention Network (KAN)</strong>, and
+        <strong>Mamba</strong>.
+      </p>
+
+      <h3>3.1 Convolutional Neural Networks (CNNs)</h3>
+      <p><strong>Working Principle</strong>:</p>
+      <p>
+        Convolutional Neural Networks (CNNs) are specifically designed for
+        analyzing image data. They work by passing the image through several
+        layers of convolutions, where each layer applies small filters (kernels)
+        to detect basic visual features such as edges, textures, and patterns.
+        These detected features are progressively combined to form higher-level
+        abstractions in deeper layers. CNNs often use activation functions such
+        as ReLU to add non-linearity, pooling layers (e.g., max pooling) to
+        reduce the spatial dimensions, and fully connected layers at the end for
+        classification.
+      </p>
+
+      <p><strong>Performance Rating</strong>:</p>
+      <ul>
+        <li>
+          <strong>Accuracy</strong>: Generally high, especially for smaller or
+          less complex datasets.
+        </li>
+        <li><strong>Training Time</strong>: Moderate.</li>
+        <li><strong>Resource Utilization</strong>: Moderate.</li>
+        <li><strong>Code Complexity</strong>: Medium.</li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for CNN</h4>
+        <pre><code>For each image in training set:
     Apply convolutional filters to detect features (e.g., edges, textures)
     Apply ReLU activation to introduce non-linearity
     Apply max-pooling to reduce dimensionality and retain important features
     Flatten the output from convolutional layers
     Pass through fully connected layers to classify the image
-    Output final predictions
-                    </pre
-            >
-          </div>
-        </div>
+    Output final predictions</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>3.2 VGGNet</h3>
-          <p>
-            <strong>Working Principle</strong>: VGGNet is an architecture that
-            was designed to increase the depth of CNNs while maintaining
-            simplicity. It uses 3x3 filters stacked together to create deeper
-            networks, which can capture more complex and abstract features from
-            the input images. VGGNet focuses on simplicity and scalability,
-            using only small (3x3) convolution filters and pooling layers to
-            reduce dimensionality. Despite its simplicity, it achieves
-            state-of-the-art results, especially in tasks like object detection
-            and classification.
-          </p>
-          <p><strong>Performance Rating</strong>:</p>
-          <ul>
-            <li>
-              <strong>Accuracy</strong>: Very high for image classification
-              tasks, especially with larger datasets.
-            </li>
-            <li>
-              <strong>Training Time</strong>: High. Due to its deep
-              architecture, VGGNet requires significant computational power and
-              longer training times.
-            </li>
-            <li>
-              <strong>Resource Utilization</strong>: High. The depth of VGGNet
-              means it requires a lot of memory, especially for training on
-              large datasets.
-            </li>
-            <li>
-              <strong>Code Complexity</strong>: High. Implementing VGGNet from
-              scratch can be complex, and optimizing its performance requires
-              fine-tuning, especially due to its large number of parameters.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode</strong>:</p>
-            <pre>
-For each image in training set:
+      <h3>3.2 VGGNet</h3>
+      <p><strong>Working Principle</strong>:</p>
+      <p>
+        VGGNet is an architecture that was designed to increase the depth of
+        CNNs while maintaining simplicity. It uses 3x3 filters stacked together
+        to create deeper networks, which can capture more complex and abstract
+        features from the input images. VGGNet focuses on simplicity and
+        scalability, using only small (3x3) convolution filters and pooling
+        layers to reduce dimensionality. Despite its simplicity, it achieves
+        state-of-the-art results, especially in tasks like object detection and
+        classification.
+      </p>
+
+      <p><strong>Performance Rating</strong>:</p>
+      <ul>
+        <li>
+          <strong>Accuracy</strong>: Very high for image classification tasks,
+          especially with larger datasets.
+        </li>
+        <li><strong>Training Time</strong>: High.</li>
+        <li><strong>Resource Utilization</strong>: High.</li>
+        <li><strong>Code Complexity</strong>: High.</li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for VGGNet</h4>
+        <pre><code>For each image in training set:
     For each convolutional layer:
         Apply 3x3 filters to detect features
         Apply ReLU activation after each convolution layer
     Apply max-pooling to reduce dimensionality
     Flatten the output to prepare for classification
     Apply fully connected layers to make predictions
-    Output final classification result
-                    </pre
-            >
-          </div>
-        </div>
+    Output final classification result</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>3.3 ResNet (Residual Networks)</h3>
-          <p>
-            <strong>Working Principle</strong>: ResNet introduces the concept of
-            <strong>residual connections</strong>, which help prevent the
-            vanishing gradient problem in very deep networks. Instead of
-            learning the direct output of a layer, the network learns the
-            <strong>residual</strong> (or difference) between the input and
-            output of the layer. These residual connections allow the network to
-            effectively “skip” layers, making it easier to train very deep
-            networks without encountering performance degradation.
-          </p>
-          <p><strong>Performance Rating</strong>:</p>
-          <ul>
-            <li>
-              <strong>Accuracy</strong>: Very high, especially for large and
-              complex datasets.
-            </li>
-            <li>
-              <strong>Training Time</strong>: High. Deep ResNet models require
-              significant computational resources for training.
-            </li>
-            <li>
-              <strong>Resource Utilization</strong>: High. The depth of ResNet
-              means it requires powerful hardware (like GPUs or TPUs) for
-              efficient training.
-            </li>
-            <li>
-              <strong>Code Complexity</strong>: High. Implementing residual
-              connections and ensuring they work correctly requires careful
-              design and tuning.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode</strong>:</p>
-            <pre>
-For each image in training set:
+      <h3>3.3 ResNet (Residual Networks)</h3>
+      <p><strong>Working Principle</strong>:</p>
+      <p>
+        ResNet introduces the concept of <strong>residual connections</strong>,
+        which help prevent the vanishing gradient problem in very deep networks.
+        Instead of learning the direct output of a layer, the network learns the
+        <strong>residual</strong> (or difference) between the input and output
+        of the layer. These residual connections allow the network to
+        effectively “skip” layers, making it easier to train very deep networks
+        without encountering performance degradation.
+      </p>
+
+      <p><strong>Performance Rating</strong>:</p>
+      <ul>
+        <li>
+          <strong>Accuracy</strong>: Very high, especially for large and complex
+          datasets.
+        </li>
+        <li><strong>Training Time</strong>: High.</li>
+        <li><strong>Resource Utilization</strong>: High.</li>
+        <li><strong>Code Complexity</strong>: High.</li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for ResNet</h4>
+        <pre><code>For each image in training set:
     For each residual block:
         Apply convolution layers (with skip connections)
         Add the input of the block to the output (residual connection)
         Apply ReLU activation
     Apply max-pooling to reduce spatial size
     Flatten and pass through fully connected layers
-    Output final classification result
-                    </pre
-            >
-          </div>
-        </div>
+    Output final classification result</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>3.4 Inception (GoogLeNet)</h3>
-          <p>
-            <strong>Working Principle</strong>: Inception networks, introduced
-            in GoogLeNet, use a <strong>multi-path architecture</strong>. Each
-            layer in the network contains multiple convolution filters of
-            different sizes (e.g., 1x1, 3x3, and 5x5), as well as pooling
-            layers. This allows the network to capture features at different
-            scales and makes it robust to various types of image structures.
-          </p>
-          <p><strong>Performance Rating</strong>:</p>
-          <ul>
-            <li>
-              <strong>Accuracy</strong>: Very high, especially for tasks where
-              the image structure varies.
-            </li>
-            <li>
-              <strong>Training Time</strong>: High. The network's depth and
-              complexity can make training time relatively long.
-            </li>
-            <li>
-              <strong>Resource Utilization</strong>: Moderate. Although
-              Inception networks are deep, they are efficient in terms of
-              computational resources due to their efficient design.
-            </li>
-            <li>
-              <strong>Code Complexity</strong>: High. The use of multiple
-              convolution operations and multi-path layers makes the
-              implementation more complex than traditional CNNs.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode</strong>:</p>
-            <pre>
-For each image in training set:
+      <h3>3.4 Inception (GoogLeNet)</h3>
+      <p><strong>Working Principle</strong>:</p>
+      <p>
+        Inception networks, introduced in GoogLeNet, use a
+        <strong>multi-path architecture</strong>. Each layer in the network
+        contains multiple convolution filters of different sizes (e.g., 1x1,
+        3x3, and 5x5), as well as pooling layers. This allows the network to
+        capture features at different scales and makes it robust to various
+        types of image structures.
+      </p>
+
+      <p><strong>Performance Rating</strong>:</p>
+      <ul>
+        <li>
+          <strong>Accuracy</strong>: Very high, especially for tasks where the
+          image structure varies.
+        </li>
+        <li><strong>Training Time</strong>: High.</li>
+        <li><strong>Resource Utilization</strong>: Moderate.</li>
+        <li><strong>Code Complexity</strong>: High.</li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Inception</h4>
+        <pre><code>For each image in training set:
     For each inception block:
         Apply multiple convolution filters of different sizes (1x1, 3x3, 5x5)
         Combine the outputs of all filters
         Apply ReLU activation
     Apply max-pooling to reduce spatial size
     Flatten and pass through fully connected layers
-    Output final classification
-                    </pre
-            >
-          </div>
-        </div>
+    Output final classification</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>3.5 Vision Transformer (ViT)</h3>
-          <p>
-            <strong>Working Principle</strong>: The Vision Transformer (ViT)
-            uses transformer architecture — a deep learning model originally
-            designed for Natural Language Processing (NLP) — and applies it to
-            image data. The ViT model works by first splitting an image into
-            fixed-size patches, flattening each patch, and then feeding these
-            patches into the transformer model. The transformer learns the
-            relationships between the patches using
-            <strong>self-attention</strong> mechanisms, which allow it to
-            capture long-range dependencies and spatial relationships in the
-            image.
-          </p>
-          <p><strong>Performance Rating</strong>:</p>
-          <ul>
-            <li>
-              <strong>Accuracy</strong>: Very high, especially for large and
-              complex datasets.
-            </li>
-            <li>
-              <strong>Training Time</strong>: Very high. Transformers require
-              significantly more training time and computational power,
-              especially for large datasets.
-            </li>
-            <li>
-              <strong>Resource Utilization</strong>: Very high. ViT is
-              computationally expensive, requiring high-end GPUs or TPUs.
-            </li>
-            <li>
-              <strong>Code Complexity</strong>: Very high. Implementing ViT from
-              scratch is complex, and it requires efficient handling of
-              self-attention and multi-head attention layers.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode</strong>:</p>
-            <pre>
-For each image in training set:
+      <h3>3.5 Vision Transformer (ViT)</h3>
+      <p><strong>Working Principle</strong>:</p>
+      <p>
+        The Vision Transformer (ViT) uses transformer architecture — a deep
+        learning model originally designed for Natural Language Processing (NLP)
+        — and applies it to image data. The ViT model works by first splitting
+        an image into fixed-size patches, flattening each patch, and then
+        feeding these patches into the transformer model. The transformer learns
+        the relationships between the patches using
+        <strong>self-attention</strong> mechanisms, which allow it to capture
+        long-range dependencies and spatial relationships in the image.
+      </p>
+
+      <p><strong>Performance Rating</strong>:</p>
+      <ul>
+        <li>
+          <strong>Accuracy</strong>: Very high, especially for large and complex
+          datasets.
+        </li>
+        <li><strong>Training Time</strong>: Very high.</li>
+        <li><strong>Resource Utilization</strong>: Very high.</li>
+        <li><strong>Code Complexity</strong>: Very high.</li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for ViT</h4>
+        <pre><code>For each image in training set:
     Split the image into patches of fixed size
     Flatten the patches into 1D vectors
     Apply transformer encoder layers (multi-head self-attention)
     Add position encodings to the patches
     Apply a classification head (fully connected layers)
-    Output the final classification
-                    </pre
-            >
-          </div>
-        </div>
+    Output the final classification</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>3.6 Kernel Attention Network (KAN)</h3>
-          <p>
-            <strong>Working Principle</strong>: Kernel Attention Networks (KAN)
-            combine the benefits of attention mechanisms and kernel methods.
-            They introduce an attention mechanism that assigns weights to
-            regions of the image that are deemed important, based on the
-            kernel-based feature maps. This helps the network focus on the most
-            relevant regions for classification, improving accuracy in complex
-            scenarios. The use of kernel functions enables the model to extract
-            features from different parts of the image at different scales and
-            focus on high-level contextual information.
-          </p>
-          <p><strong>Performance Rating</strong>:</p>
-          <ul>
-            <li>
-              <strong>Accuracy</strong>: High. KANs can achieve strong
-              performance when feature extraction and regional attention are
-              essential.
-            </li>
-            <li>
-              <strong>Training Time</strong>: Moderate to high, depending on the
-              complexity of the image and the kernel size.
-            </li>
-            <li>
-              <strong>Resource Utilization</strong>: Moderate to high. Training
-              requires specialized hardware for kernel operations and attention
-              mechanism processing.
-            </li>
-            <li>
-              <strong>Code Complexity</strong>: High. Implementing attention
-              mechanisms with kernels can be challenging and may require
-              specialized libraries.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode</strong>:</p>
-            <pre>
-For each image in training set:
+      <h3>3.6 Kernel Attention Network (KAN)</h3>
+      <p><strong>Working Principle</strong>:</p>
+      <p>
+        Kernel Attention Networks (KAN) combine the benefits of attention
+        mechanisms and kernel methods. They introduce an attention mechanism
+        that assigns weights to regions of the image that are deemed important,
+        based on the kernel-based feature maps. This helps the network focus on
+        the most relevant regions for classification, improving accuracy in
+        complex scenarios. The use of kernel functions enables the model to
+        extract features from different parts of the image at different scales
+        and focus on high-level contextual information.
+      </p>
+
+      <p><strong>Performance Rating</strong>:</p>
+      <ul>
+        <li><strong>Accuracy</strong>: High.</li>
+        <li><strong>Training Time</strong>: Moderate to high.</li>
+        <li><strong>Resource Utilization</strong>: Moderate to high.</li>
+        <li><strong>Code Complexity</strong>: High.</li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for KAN</h4>
+        <pre><code>For each image in training set:
     Extract features using kernel-based operations
     Apply attention to focus on relevant regions
     Combine attention-weighted features
     Pass through a fully connected layer for classification
-    Output final prediction
-                    </pre
-            >
-          </div>
-        </div>
+    Output final prediction</code></pre>
+      </div>
 
-        <div class="subsection">
-          <h3>3.7 Mamba</h3>
-          <p>
-            <strong>Working Principle</strong>: Mamba is a cutting-edge model
-            designed to tackle image classification tasks with a focus on both
-            speed and efficiency. It integrates
-            <strong>transformers</strong> with advanced
-            <strong>convolution operations</strong>, combining the strengths of
-            both CNNs and transformers. This hybrid approach allows Mamba to
-            capture both low-level features (via convolutions) and long-range
-            dependencies (via transformers) in a highly efficient manner.
-          </p>
-          <p><strong>Performance Rating</strong>:</p>
-          <ul>
-            <li>
-              <strong>Accuracy</strong>: High. Mamba is optimized for both speed
-              and accuracy, often outperforming traditional models on both
-              fronts.
-            </li>
-            <li>
-              <strong>Training Time</strong>: Low to moderate. Due to its
-              efficient design, Mamba trains faster than most transformer-based
-              models.
-            </li>
-            <li>
-              <strong>Resource Utilization</strong>: Low to moderate. Mamba is
-              highly efficient, making it suitable for edge devices and mobile
-              environments.
-            </li>
-            <li>
-              <strong>Code Complexity</strong>: Medium. While Mamba is more
-              efficient than other deep learning models, implementing it
-              requires understanding both transformer architectures and
-              convolution operations.
-            </li>
-          </ul>
-          <div class="pseudocode">
-            <p><strong>Pseudocode</strong>:</p>
-            <pre>
-For each image in training set:
+      <h3>3.7 Mamba</h3>
+      <p><strong>Working Principle</strong>:</p>
+      <p>
+        Mamba is a cutting-edge model designed to tackle image classification
+        tasks with a focus on both speed and efficiency. It integrates
+        <strong>transformers</strong> with advanced
+        <strong>convolution operations</strong>, combining the strengths of both
+        CNNs and transformers. This hybrid approach allows Mamba to capture both
+        low-level features (via convolutions) and long-range dependencies (via
+        transformers) in a highly efficient manner.
+      </p>
+
+      <p><strong>Performance Rating</strong>:</p>
+      <ul>
+        <li><strong>Accuracy</strong>: High.</li>
+        <li><strong>Training Time</strong>: Low to moderate.</li>
+        <li><strong>Resource Utilization</strong>: Low to moderate.</li>
+        <li><strong>Code Complexity</strong>: Medium.</li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Mamba</h4>
+        <pre><code>For each image in training set:
     Apply convolution layers to extract basic features
     Pass through transformer layers to capture long-range dependencies
     Combine features from convolutions and transformers
-    Output final classification using fully connected layers
-                    </pre
-            >
-          </div>
-        </div>
+    Output final classification using fully connected layers</code></pre>
       </div>
+
+      <h2>Step 4: Model Training</h2>
+      <p>
+        Model training is a crucial step in the deep learning pipeline. In this
+        step, the model is optimized using a training dataset to learn the
+        underlying patterns and make accurate predictions. Training a model
+        involves selecting an appropriate optimization technique, loss function,
+        batch size, and training procedure. The goal is to iteratively adjust
+        the model's parameters to minimize the loss function and improve
+        accuracy.
+      </p>
+
+      <h3>4.1 Optimization Algorithm</h3>
+      <p>
+        The optimization algorithm is used to update the model's parameters
+        during training. Common optimization algorithms include:
+      </p>
+      <ul>
+        <li>
+          <strong>Stochastic Gradient Descent (SGD)</strong>: The simplest and
+          most commonly used optimization algorithm.
+        </li>
+        <li>
+          <strong>Adam (Adaptive Moment Estimation)</strong>: A more advanced
+          version of SGD that adapts learning rates for each parameter.
+        </li>
+        <li>
+          <strong>RMSprop</strong>: Uses a moving average of squared gradients
+          to adjust learning rates.
+        </li>
+        <li>
+          <strong>Adagrad</strong>: Adapts the learning rate based on the
+          frequency of parameter updates.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Adam Optimization</h4>
+        <pre><code>Initialize parameters θ
+Initialize moment estimates m, v
+For each iteration:
+    Compute gradients of loss function w.r.t parameters
+    Update m and v (first and second moment estimates)
+    Update θ using the corrected moments</code></pre>
+      </div>
+
+      <h3>4.2 Loss Function</h3>
+      <p>
+        The loss function quantifies how well the model is performing. Common
+        loss functions for image classification tasks include:
+      </p>
+      <ul>
+        <li>
+          <strong>Cross-Entropy Loss</strong>: Commonly used for classification
+          tasks, it measures the difference between the predicted probabilities
+          and the actual labels.
+        </li>
+        <li>
+          <strong>Mean Squared Error (MSE)</strong>: Used for regression tasks,
+          it measures the average squared difference between predicted and
+          actual values.
+        </li>
+        <li>
+          <strong>Hinge Loss</strong>: Used for binary classification tasks,
+          especially with Support Vector Machines.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Cross-Entropy Loss</h4>
+        <pre><code>For each data point:
+    Compute predicted probabilities for each class
+    Calculate the negative log of the probability corresponding to the correct class
+Return the average loss across all data points</code></pre>
+      </div>
+
+      <h3>4.3 Training Procedure</h3>
+      <p>
+        The training procedure involves feeding the training data into the
+        model, computing the loss, and updating the parameters based on the
+        chosen optimization algorithm.
+      </p>
+      <ul>
+        <li>
+          <strong>Batch Size</strong>: Defines the number of samples to process
+          before updating the model's weights.
+        </li>
+        <li>
+          <strong>Epochs</strong>: The number of times the entire dataset is
+          passed through the model. A high number of epochs can lead to
+          overfitting if the model memorizes the training data.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Training Procedure</h4>
+        <pre><code>For each epoch:
+    For each batch of data:
+        Pass data through the model (forward pass)
+        Compute the loss
+        Perform backpropagation (compute gradients)
+        Update the model parameters (using optimization algorithm)</code></pre>
+      </div>
+
+      <h3>4.4 Regularization</h3>
+      <p>
+        Regularization techniques help prevent overfitting and improve
+        generalization:
+      </p>
+      <ul>
+        <li>
+          <strong>L2 Regularization (Ridge)</strong>: Adds a penalty term
+          proportional to the square of the model parameters to the loss
+          function.
+        </li>
+        <li>
+          <strong>Dropout</strong>: Randomly drops some units (neurons) during
+          training to prevent the network from becoming overly reliant on
+          specific neurons.
+        </li>
+        <li>
+          <strong>Early Stopping</strong>: Stops training when the validation
+          loss stops improving to prevent overfitting.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for L2 Regularization</h4>
+        <pre><code>Add penalty term to the loss function:
+    L2_loss = lambda * sum(weights^2)
+Total Loss = Original Loss + L2_loss</code></pre>
+      </div>
+
+      <h3>4.5 Model Evaluation During Training</h3>
+      <p>
+        During the training process, the model is evaluated using a validation
+        set to monitor its performance.
+      </p>
+      <ul>
+        <li>
+          <strong>Validation Loss</strong>: Helps to monitor if the model is
+          overfitting or underfitting.
+        </li>
+        <li>
+          <strong>Accuracy/Precision/Recall/F1-Score</strong>: These metrics are
+          used to assess the model's performance on the validation set.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Evaluation</h4>
+        <pre><code>For each validation batch:
+    Pass data through the model
+    Compute predicted labels
+    Calculate accuracy/precision/recall/F1-score</code></pre>
+      </div>
+
+      <h3>4.6 Hyperparameter Tuning</h3>
+      <p>
+        Hyperparameters such as learning rate, batch size, and the number of
+        layers affect the performance of the model.
+      </p>
+      <ul>
+        <li>
+          <strong>Grid Search</strong> and <strong>Random Search</strong> are
+          techniques used to explore different combinations of hyperparameters
+          to find the optimal set.
+        </li>
+      </ul>
+
+      <div class="pseudocode">
+        <h4>Pseudocode for Hyperparameter Search</h4>
+        <pre><code>For each combination of hyperparameters:
+    Train model
+    Evaluate model on validation set
+Return the best hyperparameters based on evaluation metrics</code></pre>
+      </div>
+
+      <h2>Step 5: Evaluation</h2>
+      <p>
+        Evaluation is a critical phase in the machine learning pipeline as it
+        helps assess how well the model performs. After training the model, it
+        is essential to validate its effectiveness using different performance
+        metrics. For plant disease detection, where the goal is to classify
+        images into one of several categories (diseased or healthy plants), the
+        most common evaluation metrics are <strong>accuracy</strong>,
+        <strong>precision</strong>, <strong>recall</strong>,
+        <strong>F1-score</strong>, and <strong>AUC-ROC</strong>. Let's dive
+        deeper into each of these metrics, what they represent, and what are
+        considered good values for each of them.
+      </p>
+
+      <h3>5.1 Performance Metrics</h3>
+
+      <h4>1. Accuracy</h4>
+      <p>
+        Accuracy measures the proportion of correct predictions (both true
+        positives and true negatives) out of all predictions made.
+      </p>
+      <p><strong>Formula</strong>:</p>
+      <p>
+        \[ \text{Accuracy} = \frac{\text{True Positives} + \text{True
+        Negatives}}{\text{Total Predictions}} = \frac{TP + TN}{TP + TN + FP +
+        FN} \]
+      </p>
+      <p><strong>When is it good?</strong></p>
+      <p>
+        <strong>Good accuracy</strong> is context-dependent, especially when the
+        dataset is imbalanced. For example, if 90% of the dataset consists of
+        healthy plants and the model simply predicts "healthy" all the time, it
+        will have high accuracy but perform poorly on detecting disease.
+        Therefore, a high accuracy alone isn't always a reliable indicator of
+        performance.
+      </p>
+      <p><strong>Typical Values</strong>:</p>
+      <ul>
+        <li>
+          <strong>High Accuracy</strong>: > 80% (This is often considered a
+          solid result for a well-performing model, especially in imbalanced
+          datasets).
+        </li>
+      </ul>
+
+      <h4>2. Precision</h4>
+      <p>Precision measures the accuracy</p>
     </div>
   </body>
 </html>
