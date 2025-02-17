@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plant Leaf Disease Datasets and Techniques</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      a {
+        color: #1a0dab;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Summary of Plant Leaf Disease Datasets</h2>
+    <table>
+      <tr>
+        <th>Dataset Name</th>
+        <th>Crops</th>
+        <th>Key Features</th>
+        <th>Size</th>
+        <th>Access</th>
+      </tr>
+      <tr>
+        <td>PlantVillage Dataset</td>
+        <td>Multiple (e.g., tomato, potato)</td>
+        <td>
+          61,486 images, 39 classes, augmented data, widely used for deep
+          learning models.
+        </td>
+        <td>61,486 images</td>
+        <td>Kaggle</td>
+      </tr>
+      <tr>
+        <td>New Plant Diseases Dataset</td>
+        <td>Multiple (e.g., apple, corn)</td>
+        <td>
+          87,000+ images, 38 classes, offline augmentation, divided into
+          train/val/test.
+        </td>
+        <td>87,000+ images</td>
+        <td>Papers With Code</td>
+      </tr>
+      <tr>
+        <td>PlantDoc Dataset</td>
+        <td>13 plant species (e.g., tomato, grape)</td>
+        <td>
+          2,598 images, 17 disease classes, manually annotated, improves
+          classification.
+        </td>
+        <td>2,598 images</td>
+        <td>GitHub</td>
+      </tr>
+      <tr>
+        <td>DiaMOS Plant Dataset</td>
+        <td>Pear trees</td>
+        <td>
+          3,505 images (leaves + fruits), annotations in CSV/YOLO, field and lab
+          images.
+        </td>
+        <td>3,505 images</td>
+        <td>Zenodo</td>
+      </tr>
+      <tr>
+        <td>TensorFlow Plant Leaves Dataset</td>
+        <td>Multiple (22 categories)</td>
+        <td>
+          4,502 high-resolution images, shifted label encoding, JPG format.
+        </td>
+        <td>4,502 images</td>
+        <td>TensorFlow Datasets</td>
+      </tr>
+      <tr>
+        <td>RoCoLe Dataset</td>
+        <td>Robusta coffee</td>
+        <td>
+          Focuses on coffee leaf diseases, high-quality images, annotations.
+        </td>
+        <td>Not specified</td>
+        <td>Referenced in DiaMOS Plant paper</td>
+      </tr>
+      <tr>
+        <td>BRACOL Dataset</td>
+        <td>Arabica coffee</td>
+        <td>Brazilian coffee leaf dataset, disease and pest annotations.</td>
+        <td>Not specified</td>
+        <td>Referenced in DiaMOS Plant paper</td>
+      </tr>
+      <tr>
+        <td>Rice Leaf Disease Dataset</td>
+        <td>Rice</td>
+        <td>
+          Focuses on rice leaf diseases, labeled images for training/validation.
+        </td>
+        <td>Not specified</td>
+        <td>Referenced in DiaMOS Plant paper</td>
+      </tr>
+      <tr>
+        <td>Plant Pathology Dataset</td>
+        <td>Apple</td>
+        <td>Classifies foliar diseases of apples, annotated images.</td>
+        <td>Not specified</td>
+        <td>Referenced in DiaMOS Plant paper</td>
+      </tr>
+      <tr>
+        <td>Citrus Dataset</td>
+        <td>Citrus (e.g., oranges, lemons)</td>
+        <td>Focuses on citrus diseases, includes fruit and leaf images.</td>
+        <td>Not specified</td>
+        <td>Referenced in DiaMOS Plant paper</td>
+      </tr>
+      <tr>
+        <td>APDA Dataset</td>
+        <td>Multiple</td>
+        <td>
+          Automated plant disease analysis, labeled images for classification.
+        </td>
+        <td>Not specified</td>
+        <td>Referenced in DiaMOS Plant paper</td>
+      </tr>
+      <tr>
+        <td>Potato Leaf Disease Dataset</td>
+        <td>Potato</td>
+        <td>
+          Focuses on potato leaf diseases, labeled images for
+          training/validation.
+        </td>
+        <td>Not specified</td>
+        <td>Referenced in hybrid frameworks study</td>
+      </tr>
+      <tr>
+        <td>Maize Leaf (NLB) Dataset</td>
+        <td>Maize (corn)</td>
+        <td>
+          Focuses on northern leaf blight in maize, labeled images for disease
+          detection.
+        </td>
+        <td>Not specified</td>
+        <td>Referenced in machine learning survey</td>
+      </tr>
+      <tr>
+        <td>Combined Dataset (PlantDoc + Web-Sourced Images)</td>
+        <td>Multiple</td>
+        <td>
+          Combines PlantDoc with web-sourced images, enhances diversity and
+          realism.
+        </td>
+        <td>Not specified</td>
+        <td>Referenced in deep learning study</td>
+      </tr>
+    </table>
+
+    <h2>General Preprocessing Strategies for Plant Leaf Disease Images</h2>
+    <table>
+      <tr>
+        <th>Preprocessing Strategy</th>
+        <th>Methodology</th>
+        <th>Pros</th>
+        <th>Cons</th>
+        <th>Remarks</th>
+      </tr>
+      <tr>
+        <td>Grayscaling</td>
+        <td>
+          Convert RGB images to grayscale by averaging or weighted sum of color
+          channels.
+        </td>
+        <td>Reduces computational complexity, removes color bias.</td>
+        <td>
+          Loses color information, which may be critical for disease detection.
+        </td>
+        <td>Useful for models where color is not a distinguishing feature.</td>
+      </tr>
+      <tr>
+        <td>Upscaling</td>
+        <td>
+          Increase image resolution using interpolation (e.g., bilinear,
+          bicubic).
+        </td>
+        <td>Enhances details, useful for low-resolution images.</td>
+        <td>Increases computational cost, may introduce artifacts.</td>
+        <td>
+          Use with caution; ensure upscaling does not distort important
+          features.
+        </td>
+      </tr>
+      <tr>
+        <td>Downscaling</td>
+        <td>
+          Reduce image resolution to a fixed size (e.g., 224x224 for CNNs).
+        </td>
+        <td>Reduces computational cost, standardizes input size.</td>
+        <td>May lose fine details, especially in small lesions or textures.</td>
+        <td>
+          Commonly used for deep learning models to ensure uniform input
+          dimensions.
+        </td>
+      </tr>
+      <tr>
+        <td>Segmentation</td>
+        <td>
+          Isolate the leaf from the background using techniques like
+          thresholding or U-Net.
+        </td>
+        <td>Focuses on relevant regions, reduces noise from background.</td>
+        <td>
+          Requires accurate segmentation; errors can propagate to
+          classification.
+        </td>
+        <td>Works well when the background is complex or noisy.</td>
+      </tr>
+      <tr>
+        <td>Normalization</td>
+        <td>
+          Scale pixel values to a range (e.g., 0-1 or -1 to 1) using min-max
+          scaling.
+        </td>
+        <td>
+          Improves convergence during training, standardizes input distribution.
+        </td>
+        <td>
+          May not be necessary for all models (e.g., CNNs with batch
+          normalization).
+        </td>
+        <td>
+          Essential for models sensitive to input scale (e.g., SVM, k-NN).
+        </td>
+      </tr>
+      <tr>
+        <td>Data Augmentation</td>
+        <td>
+          Apply transformations like rotation, flipping, cropping, and noise
+          injection.
+        </td>
+        <td>Increases dataset size, improves model generalization.</td>
+        <td>May introduce unrealistic variations if overused.</td>
+        <td>Widely used in deep learning to prevent overfitting.</td>
+      </tr>
+      <tr>
+        <td>Histogram Equalization</td>
+        <td>Enhance contrast by redistributing pixel intensity values.</td>
+        <td>Improves visibility of subtle features, enhances contrast.</td>
+        <td>May amplify noise, not suitable for all image types.</td>
+        <td>Useful for images with poor lighting or low contrast.</td>
+      </tr>
+      <tr>
+        <td>Noise Reduction</td>
+        <td>Apply filters (e.g., Gaussian, median) to remove noise.</td>
+        <td>Reduces noise, improves image quality.</td>
+        <td>May blur important details if over-applied.</td>
+        <td>Use adaptive filters to preserve edges and textures.</td>
+      </tr>
+      <tr>
+        <td>Color Space Conversion</td>
+        <td>Convert RGB to other color spaces (e.g., HSV, LAB, YCbCr).</td>
+        <td>
+          Highlights specific features (e.g., disease spots in certain
+          channels).
+        </td>
+        <td>Increases complexity, may require domain knowledge.</td>
+        <td>
+          Useful for specific diseases where color channels are discriminative.
+        </td>
+      </tr>
+      <tr>
+        <td>Edge Detection</td>
+        <td>Detect edges using techniques like Canny or Sobel.</td>
+        <td>Emphasizes boundaries and shapes, useful for texture analysis.</td>
+        <td>May lose internal details, sensitive to noise.</td>
+        <td>
+          Often used as a preprocessing step for segmentation or feature
+          extraction.
+        </td>
+      </tr>
+      <tr>
+        <td>Background Removal</td>
+        <td>
+          Remove non-leaf regions using masking or clustering (e.g., k-means).
+        </td>
+        <td>Focuses on the leaf, reduces irrelevant data.</td>
+        <td>
+          Requires accurate background detection; errors can affect results.
+        </td>
+        <td>Useful for field images with complex backgrounds.</td>
+      </tr>
+      <tr>
+        <td>Contrast Adjustment</td>
+        <td>Adjust brightness and contrast using gamma correction or CLAHE.</td>
+        <td>
+          Enhances visibility of disease symptoms, improves feature extraction.
+        </td>
+        <td>May over-enhance or distort colors if not tuned properly.</td>
+        <td>Useful for images with uneven lighting or low contrast.</td>
+      </tr>
+      <tr>
+        <td>Rotation Alignment</td>
+        <td>Rotate images to align leaves horizontally or vertically.</td>
+        <td>Standardizes leaf orientation, improves feature consistency.</td>
+        <td>
+          May not be necessary for rotation-invariant models (e.g., CNNs).
+        </td>
+        <td>Useful for traditional machine learning models.</td>
+      </tr>
+      <tr>
+        <td>Patch Extraction</td>
+        <td>Extract smaller patches from large images.</td>
+        <td>Focuses on specific regions, reduces input size.</td>
+        <td>May miss global context, increases dataset size.</td>
+        <td>Useful for high-resolution images or localized diseases.</td>
+      </tr>
+    </table>
+
+    <h2>Segmentation Techniques for Plant Leaf Disease Images</h2>
+    <table>
+      <tr>
+        <th>Segmentation Type</th>
+        <th>Methodology</th>
+        <th>Pros</th>
+        <th>Cons</th>
+        <th>Remarks</th>
+      </tr>
+      <tr>
+        <td>Thresholding</td>
+        <td>
+          Apply a threshold to separate the leaf from the background based on
+          pixel intensity.
+        </td>
+        <td>Simple and fast, works well for uniform backgrounds.</td>
+        <td>Struggles with complex backgrounds or uneven lighting.</td>
+        <td>Best for controlled environments (e.g., lab images).</td>
+      </tr>
+      <tr>
+        <td>Color-Based Segmentation</td>
+        <td>
+          Use color spaces (e.g., HSV, LAB) to segment leaves based on color
+          differences.
+        </td>
+        <td>Effective for distinguishing leaves from green backgrounds.</td>
+        <td>May fail if the background has similar colors to the leaf.</td>
+        <td>Useful for field images with green backgrounds.</td>
+      </tr>
+      <tr>
+        <td>Edge Detection</td>
+        <td>
+          Detect leaf boundaries using edge detection algorithms (e.g., Canny,
+          Sobel).
+        </td>
+        <td>Emphasizes leaf shape and structure.</td>
+        <td>Sensitive to noise, may produce incomplete boundaries.</td>
+        <td>Often combined with other techniques for better results.</td>
+      </tr>
+      <tr>
+        <td>Clustering (e.g., k-means)</td>
+        <td>
+          Group pixels into clusters based on color or intensity (e.g., k-means
+          clustering).
+        </td>
+        <td>
+          Handles complex backgrounds, works well for multi-colored leaves.
+        </td>
+        <td>Computationally expensive, requires tuning of cluster numbers.</td>
+        <td>Useful for images with varying leaf and background colors.</td>
+      </tr>
+      <tr>
+        <td>Region-Based Segmentation</td>
+        <td>
+          Identify regions of interest (e.g., diseased spots) using
+          region-growing algorithms.
+        </td>
+        <td>Focuses on specific areas, useful for localized diseases.</td>
+        <td>
+          May over-segment or under-segment if parameters are not tuned
+          properly.
+        </td>
+        <td>Suitable for images with distinct disease spots.</td>
+      </tr>
+      <tr>
+        <td>Watershed Algorithm</td>
+        <td>
+          Treat pixel intensity as a topographic surface and flood regions to
+          separate objects.
+        </td>
+        <td>Effective for separating overlapping leaves or disease spots.</td>
+        <td>
+          Sensitive to noise, may require preprocessing (e.g., smoothing).
+        </td>
+        <td>Works well for images with overlapping structures.</td>
+      </tr>
+      <tr>
+        <td>Deep Learning-Based Segmentation (e.g., U-Net, Mask R-CNN)</td>
+        <td>Train a neural network to segment leaves or disease regions.</td>
+        <td>
+          Highly accurate, can handle complex backgrounds and overlapping
+          leaves.
+        </td>
+        <td>Requires labeled data for training, computationally expensive.</td>
+        <td>
+          State-of-the-art for segmentation tasks, ideal for large datasets.
+        </td>
+      </tr>
+      <tr>
+        <td>Morphological Operations</td>
+        <td>
+          Use operations like erosion, dilation, and opening to refine
+          segmentation results.
+        </td>
+        <td>
+          Removes noise, smooths boundaries, and fills gaps in segmented
+          regions.
+        </td>
+        <td>May distort shapes if over-applied.</td>
+        <td>
+          Often used as a post-processing step after initial segmentation.
+        </td>
+      </tr>
+      <tr>
+        <td>GrabCut Algorithm</td>
+        <td>
+          Interactive segmentation using graph cuts to separate foreground
+          (leaf) and background.
+        </td>
+        <td>
+          Balances automation and user control, works well for complex images.
+        </td>
+        <td>
+          Requires user input for initialization, slower than fully automated
+          methods.
+        </td>
+        <td>Useful for small datasets or critical applications.</td>
+      </tr>
+      <tr>
+        <td>Superpixel Segmentation</td>
+        <td>
+          Group pixels into superpixels (e.g., SLIC algorithm) for coarse
+          segmentation.
+        </td>
+        <td>Reduces computational complexity, preserves boundaries.</td>
+        <td>May not capture fine details, requires further refinement.</td>
+        <td>Useful as a preprocessing step for other segmentation methods.</td>
+      </tr>
+    </table>
+  </body>
+</html>
