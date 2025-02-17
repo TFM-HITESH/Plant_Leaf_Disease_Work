@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Leaf Disease Classification Pipeline</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .pipeline-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .process {
+            background-color: #f8fafc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .process:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .step-description {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+
+        .sub-step {
+            font-size: 14px;
+            margin-left: 20px;
+            color: #34495e;
+        }
+
+        .arrow {
+            font-size: 28px;
+            text-align: center;
+            margin: 20px;
+            color: #3498db;
+        }
+
+        .arrow-up {
+            transform: rotate(90deg);
+        }
+
+        .arrow-down {
+            transform: rotate(-90deg);
+        }
+
+        .arrow-horizontal {
+            transform: rotate(180deg);
+        }
+
+        .process-title {
+            color: #3498db;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .sub-step-bold {
+            font-weight: 600;
+        }
+
+        /* Media Query for responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .pipeline-title {
+                font-size: 26px;
+            }
+
+            .process {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="pipeline-title">Plant Leaf Disease Classification Pipeline for Beginners</div>
+
+    <!-- Step 1: Data Collection and Preprocessing -->
+    <div class="section">
+        <div class="process">
+            <div class="process-title">Step 1: Data Collection and Preprocessing</div>
+            <div class="step-description">
+                <p>In this first step, we begin by collecting and preparing the data that will be used to train the machine learning model. Preprocessing the data is crucial to ensure that the model learns from clean, diverse, and correctly formatted images.</p>
+                <div class="sub-step"><strong>Dataset Selection:</strong> A dataset is a collection of data that will be used to train the model. For plant leaf disease classification, we can use datasets like the <a href="https://www.kaggle.com/datasets/emmarex/plantdisease">PlantVillage dataset</a>, which contains over 61,000 images categorized into 39 classes of plant diseases.</div>
+                <div class="sub-step"><strong>Data Augmentation:</strong> Data augmentation techniques are used to artificially increase the size of the training dataset by applying random transformations like rotation, flipping, and scaling to the images. This helps the model generalize better and avoid overfitting. Common augmentations include:
+                    <ul>
+                        <li><strong>Rotation:</strong> Rotate the image by a certain angle.</li>
+                        <li><strong>Flipping:</strong> Flip the image horizontally or vertically.</li>
+                        <li><strong>Scaling:</strong> Resize the image.</li>
+                    </ul>
+                </div>
+                <div class="sub-step"><strong>Normalization:</strong> Normalization involves scaling the pixel values of the images to a specific range. For neural networks, it's common to scale pixel values between 0 and 1 to help the model train faster and achieve better performance. This is done by dividing each pixel value by 255 (the maximum pixel value for an 8-bit image).</div>
+                <p><strong>Formula for Normalization:</strong></p>
+                <pre>Normalized Pixel Value = Pixel Value / 255</pre>
+                <div class="sub-step"><strong>References:</strong> 
+                    <ul>
+                        <li>Image Augmentation techniques: <a href="https://arxiv.org/pdf/1607.06542.pdf">Image Augmentation for Deep Learning</a></li>
+                        <li>Data Normalization: <a href="https://towardsdatascience.com/image-data-normalization-for-deep-learning-cnn-fd3c8b870902">Understanding Data Normalization</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arrow -->
+    <div class="arrow arrow-down">↓</div>
+
+    <!-- Step 2: Segmentation (Optional) -->
+    <div class="section">
+        <div class="process">
+            <div class="process-title">Step 2: Segmentation (Optional)</div>
+            <div class="step-description">
+                <p>Segmentation is a technique used to isolate the region of interest (the leaf) from the rest of the image, making it easier for the model to focus on the relevant features. This step is optional but can improve classification accuracy.</p>
+                <div class="sub-step"><strong>Leaf Segmentation:</strong> In this step, we separate the leaf from the background. This can be done using simple methods like thresholding (where we define a pixel intensity threshold) or using more advanced techniques like U-Net, a deep learning-based model specifically designed for image segmentation.</div>
+                <div class="sub-step"><strong>Pros:</strong> 
+                    <ul>
+                        <li>Improves model accuracy by focusing only on the leaf.</li>
+                        <li>Reduces noise from the background, helping the model learn better features.</li>
+                    </ul>
+                </div>
+                <div class="sub-step"><strong>Cons:</strong> 
+                    <ul>
+                        <li>Increases computational complexity, requiring more processing power.</li>
+                        <li>If the segmentation is inaccurate, it may introduce errors in the model's learning process.</li>
+                    </ul>
+                </div>
+                <p><strong>Reference:</strong> 
+                    <ul>
+                        <li>U-Net Architecture: <a href="https://arxiv.org/abs/1505.04597">U-Net: Convolutional Networks for Biomedical Image Segmentation</a></li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arrow -->
+    <div class="arrow arrow-down">↓</div>
+
+    <!-- Step 3: Model Selection -->
+    <div class="section">
+        <div class="process">
+            <div class="process-title">Step 3: Model Selection</div>
+            <div class="step-description">
+                <p>The next step is to select a deep learning model that is suitable for image classification. There are several popular architectures used for image classification tasks.</p>
+                <div class="sub-step"><strong>EfficientNet:</strong> EfficientNet is a state-of-the-art model known for its balance between accuracy and computational efficiency. It uses a compound scaling method to scale the model’s depth, width, and resolution efficiently.</div>
+                <div class="sub-step"><strong>ResNet:</strong> ResNet (Residual Networks) uses residual connections (skip connections) to allow the model to learn deeper features without encountering vanishing gradient problems. It is very effective for deep architectures.</div>
+                <div class="sub-step"><strong>Inception (GoogLeNet):</strong> Inception models use multiple convolutional filters at each layer, enabling the model to capture features at different scales, making them very effective for complex image datasets.</div>
+                <p><strong>Reference:</strong> 
+                    <ul>
+                        <li>EfficientNet Paper: <a href="https://arxiv.org/abs/1905.11946">EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks</a></li>
+                        <li>ResNet Paper: <a href="https://arxiv.org/abs/1512.03385">Deep Residual Learning for Image Recognition</a></li>
+                        <li>Inception Paper: <a href="https://arxiv.org/abs/1409.4842">Going Deeper with Convolutions</a></li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arrow -->
+    <div class="arrow arrow-down">↓</div>
+
+    <!-- Step 4: Model Training -->
+    <div class="section">
+        <div class="process">
+            <div class="process-title">Step 4: Model Training</div>
+            <div class="step-description">
+                <p>Now that we have selected a model, it's time to train it on the plant leaf disease dataset. This involves teaching the model to recognize patterns in the data so it can classify unseen images.</p>
+                <div class="sub-step"><strong>Transfer Learning:</strong> Transfer learning involves using a model that has already been pre-trained on a large dataset (like ImageNet) and fine-tuning it on the plant leaf disease dataset. This reduces training time and helps the model generalize better.</div>
+                <div class="sub-step"><strong>Hyperparameter Tuning:</strong> Hyperparameters such as learning rate, batch size, and number of epochs need to be tuned to get the best performance. This process involves trial and error or using automated methods like Grid Search or Random Search.</div>
+                <p><strong>Reference:</strong> 
+                    <ul>
+                        <li>Transfer Learning: <a href="https://towardsdatascience.com/transfer-learning-for-deep-learning-163d8a7fe2f2">Transfer Learning in Deep Learning</a></li>
+                        <li>Hyperparameter Tuning: <a href="https://www.analyticsvidhya.com/blog/2020/05/hyperparameter-tuning-in-machine-learning-with-python/">Hyperparameter Tuning for ML</a></li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arrow -->
+    <div class="arrow arrow-down">↓</div>
+
+    <!-- Step 5: Evaluation -->
+    <div class="section">
+        <div class="process">
+            <div class="process-title">Step 5: Evaluation</div>
+            <div class="step-description">
+                <p>Once the model is trained, we evaluate its performance using various metrics to determine how well it can classify plant leaf diseases.</p>
+                <div class="sub-step"><strong>Performance Metrics:</strong> Common evaluation metrics for classification tasks include:
+                    <ul>
+                        <li><strong>Accuracy:</strong> The percentage of correctly classified images.</li>
+                        <li><strong>Precision:</strong> The proportion of true positives among all positive predictions.</li>
+                        <li><strong>Recall:</strong> The proportion of true positives among all actual positives.</li>
+                        <li><strong>F1-Score:</strong> The harmonic mean of precision and recall, providing a balanced measure of model performance.</li>
+                    </ul>
+                </div>
+                <p><strong>Formula for F1-Score:</strong></p>
+                <pre>F1-Score = 2 * (Precision * Recall) / (Precision + Recall)</pre>
+                <div class="sub-step"><strong>References:</strong>
+                    <ul>
+                        <li>Accuracy, Precision, Recall: <a href="https://machinelearningmastery.com/classification-accuracy-is-not-enough-more-performance-measures-you-can-use/">Classification Performance Metrics</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
